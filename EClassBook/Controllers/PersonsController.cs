@@ -6,22 +6,25 @@ namespace EClassBook.Controllers
     using System.Collections.Generic;
     using Microsoft.AspNetCore.Mvc;
     using Models;
+    using Context;
+    using System.Linq;
 
     [Route("api/persons")]
     [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true, Duration = -1)]
     public class PersonsController : Controller
     {
+        private EBookContext _context;
+
+        public PersonsController(EBookContext context)
+        {
+            _context = context;
+        }
+
         // GET: /<controller>/
         [HttpGet]
         public IEnumerable<Person> GetPersons()
         {
-
-            return new List<Person>
-            {
-                new Person{Name = "Max Musterman", City="Naustadt", Dob=new DateTime(1978, 07, 29)},
-                new Person{Name = "Maria Musterfrau", City="London", Dob=new DateTime(1979, 08, 30)},
-                new Person{Name = "John Doe", City="Los Angeles", Dob=new DateTime(1980, 09, 01)}
-            };
+            return _context.Persons.ToList();
         }
     }
 }
