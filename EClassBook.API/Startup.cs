@@ -1,12 +1,12 @@
-﻿namespace EClassBook
+﻿namespace EClassBook.API
 {
-    using Context;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
     using System.IO;
+    using Data.Context;
     using Microsoft.EntityFrameworkCore;
 
     public class Startup
@@ -30,12 +30,14 @@
             Configuration = builder.Build();
         }
 
-        public IConfigurationRoot Configuration { get; set; }
+        public Microsoft.Extensions.Configuration.IConfigurationRoot Configuration { get; set; }
 
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddDbContext<EBookContext>(options => options.UseSqlServer(Configuration.GetConnectionString("EClassBookDatabase")));
+            services.AddDbContext<EBookContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("EClassBookDatabase"),
+                b => b.MigrationsAssembly("EClassBook.API")));
 
         }
 
@@ -62,6 +64,8 @@
             });
             app.UseStaticFiles();
             app.UseMvc();
+            //PersonDbInitializer.Initialize(app.ApplicationServices);
         }
+
     }
 }

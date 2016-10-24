@@ -1,12 +1,12 @@
 ﻿// For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace EClassBook.Controllers
+namespace EClassBook.API.Controllers
 {
     using System.Collections.Generic;
     using Microsoft.AspNetCore.Mvc;
-    using Models;
-    using Context;
     using System.Linq;
+    using Data.Context;
+    using Model.Entities;
 
     [Route("api/persons")]
     [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true, Duration = -1)]

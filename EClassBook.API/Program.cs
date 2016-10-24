@@ -1,4 +1,4 @@
-﻿namespace EClassBook
+﻿namespace EClassBook.API
 {
     using System.IO;
     using Microsoft.AspNetCore.Hosting;

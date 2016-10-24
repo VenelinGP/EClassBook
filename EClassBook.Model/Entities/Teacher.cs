@@ -1,4 +1,4 @@
-﻿namespace EClassBook.Models
+﻿namespace EClassBook.Model.Entities
 {
     using System.Collections.Generic;
 

@@ -1,8 +1,9 @@
-﻿namespace EClassBook.Models
+﻿namespace EClassBook.Model.Entities
 {
+    using Model;
     using System;
 
-    public class Person
+    public class Person : IPerson
     {
         public int PersonId { get; set; }
         public string Name { get; set; }

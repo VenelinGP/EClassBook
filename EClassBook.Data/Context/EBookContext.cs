@@ -1,7 +1,7 @@
-﻿namespace EClassBook.Context
+﻿namespace EClassBook.Data.Context
 {
+    using Model.Entities;
     using Microsoft.EntityFrameworkCore;
-    using Models;
 
     public class EBookContext : DbContext
     {
