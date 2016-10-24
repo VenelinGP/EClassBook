@@ -4,7 +4,7 @@
     using System.Collections.Generic;
 
     public class Student
-    {
+    { 
         private ICollection<Grade> grades;
 
         public Student()

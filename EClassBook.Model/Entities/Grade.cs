@@ -1,7 +1,6 @@
 ﻿namespace EClassBook.Model.Entities
 {
     using System;
-
     public class Grade
     {
         public int GradeId { get; set; }

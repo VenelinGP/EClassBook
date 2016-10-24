@@ -1,8 +1,8 @@
 ﻿namespace EClassBook.Model.Entities
 {
     using System.Collections.Generic;
-
-    public class Teacher
+    
+    public class Teacher 
     {
         private ICollection<Course> courses;
 

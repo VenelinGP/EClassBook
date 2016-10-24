@@ -13,6 +13,7 @@
         public DbSet<Headmaster> Headmasters { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Student> Students { get; set; }
+        public DbSet<Address> Address { get; set; }
         public DbSet<Grade> Grades { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Role> Roles { get; set; }

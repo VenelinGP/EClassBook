@@ -15,6 +15,7 @@
             InitializePersons();
         }
 
+
         private static void InitializePersons()
         {
             if (!context.Persons.Any())
@@ -33,6 +34,17 @@
                 context.Persons.Add(person_06);
                 context.SaveChanges();
             }
+            if (!context.Headmasters.Any())
+            {
+                Console.WriteLine("Here");
+                Role role = new Role { Name = RoleEnum.admin };
+                Address address = new Address { City = "Sofia", Street = "31, Al. Malinov blvd", PhoneNumber = "0888308000" };
+                Headmaster headmaster_01 = new Headmaster { Name = "Max Musterman", Address = address, Role = role };
+                context.Headmasters.Add(headmaster_01);
+                context.SaveChanges();
+            }
+
         }
+
     }
 }

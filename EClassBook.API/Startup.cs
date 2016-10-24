@@ -8,6 +8,7 @@
     using System.IO;
     using Data.Context;
     using Microsoft.EntityFrameworkCore;
+    using Data;
 
     public class Startup
     {
@@ -64,7 +65,7 @@
             });
             app.UseStaticFiles();
             app.UseMvc();
-            //PersonDbInitializer.Initialize(app.ApplicationServices);
+            PersonDbInitializer.Initialize(app.ApplicationServices);
         }
 
     }
