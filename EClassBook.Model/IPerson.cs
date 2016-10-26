@@ -1,6 +1,6 @@
 ﻿namespace EClassBook.Model
 {
-    interface IPerson
+    public interface IPerson
     {
         int PersonId { get; set; }
     }

@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent }   from './app.component';
-import { PersonService } from './person.service';
+import { HeadmasterService } from './headmaster.service';
 
 @NgModule({
     imports: [BrowserModule,
@@ -12,7 +12,7 @@ import { PersonService } from './person.service';
         HttpModule],
     declarations: [AppComponent],
     providers: [
-        PersonService,
+        HeadmasterService
     ],
     bootstrap: [AppComponent]
 })

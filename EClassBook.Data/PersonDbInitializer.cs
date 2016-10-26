@@ -1,26 +1,24 @@
 ﻿namespace EClassBook.Data
 {
-    using Context;
-    using Model.Entities;
     using System;
     using System.Linq;
-
+    using Model.Entities;
 
     public class PersonDbInitializer
     {
         private static EBookContext context;
+
         public static void Initialize(IServiceProvider serviceProvider)
         {
             context = (EBookContext)serviceProvider.GetService(typeof(EBookContext));
             InitializePersons();
         }
 
-
         private static void InitializePersons()
         {
             if (!context.Persons.Any())
             {
-                Person person_01 = new Person { Name = "Max Musterman", City = "Nausadt", Dob = new DateTime(1978, 7, 29)};
+                Person person_01 = new Person { Name = "Max Musterman", City = "Nausadt", Dob = new DateTime(1978, 7, 29) };
                 Person person_02 = new Person { Name = "Maria Musterfrau", City = "London", Dob = new DateTime(1979, 8, 30) };
                 Person person_03 = new Person { Name = "John Doe", City = "Los Angeles", Dob = new DateTime(1980, 09, 1) };
                 Person person_04 = new Person { Name = "Chris Sakellarios", City = "Paris", Dob = new DateTime(1981, 10, 5) };
@@ -34,17 +32,16 @@
                 context.Persons.Add(person_06);
                 context.SaveChanges();
             }
+
             if (!context.Headmasters.Any())
             {
                 Console.WriteLine("Here");
-                Role role = new Role { Name = RoleEnum.admin };
+                Role role = new Role { Name = RoleEnum.Admin };
                 Address address = new Address { City = "Sofia", Street = "31, Al. Malinov blvd", PhoneNumber = "0888308000" };
                 Headmaster headmaster_01 = new Headmaster { Name = "Max Musterman", Address = address, Role = role };
                 context.Headmasters.Add(headmaster_01);
                 context.SaveChanges();
             }
-
         }
-
     }
 }

@@ -2,6 +2,7 @@
 {
     using System.IO;
     using Microsoft.AspNetCore.Hosting;
+
     public class Program
     {
         public static void Main()

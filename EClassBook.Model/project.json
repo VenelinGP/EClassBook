@@ -3,7 +3,8 @@
 
   "dependencies": {
     "NETStandard.Library": "1.6.0",
-    "runtime.any.System.Runtime": "4.1.0"
+    "runtime.any.System.Runtime": "4.1.0",
+    "StyleCop.Analyzers": "1.0.0"
   },
 
   "frameworks": {

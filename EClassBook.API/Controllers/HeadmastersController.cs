@@ -1,34 +1,32 @@
-﻿// For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-
-namespace EClassBook.API.Controllers
+﻿namespace EClassBook.API.Controllers
 {
-    using System.Collections.Generic;
-    using Microsoft.AspNetCore.Mvc;
-    using Data.Context;
-    using Model.Entities;
     using System.Linq;
+    using Data;
 
-    [Route("api/headmaster")]
+    using Microsoft.AspNetCore.Mvc;
+    using Model.Entities;
+
+    [Route("api/[controller]")]
     [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true, Duration = -1)]
-    public class HeadmasterController : Controller
+    public class HeadmastersController : Controller
     {
-        private EBookContext _context;
+        private EBookContext context;
 
-
-        public HeadmasterController(EBookContext context)
+        public HeadmastersController(EBookContext context)
         {
-            _context = context;
+            this.context = context;
         }
 
         // GET: api/values
         [HttpGet]
         public Headmaster Get()
         {
-            var result = _context.Headmasters.ToList();
-            var headmaster = result[0];
-            var address = _context.Address.ToList()[0];
-            var role = _context.Roles.ToList()[0];
+            var result = this.context.Headmasters.ToList();
+            var headmaster = result.FirstOrDefault();
+            var address = this.context.Address.ToList()[0];
+            var role = this.context.Roles.ToList()[0];
             return headmaster;
+            // return _context.Headmasters.ToList();
         }
 
         // GET api/values/5
@@ -40,8 +38,9 @@ namespace EClassBook.API.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public ActionResult Post([FromBody]string value)
         {
+            return this.View();
         }
 
         // PUT api/values/5

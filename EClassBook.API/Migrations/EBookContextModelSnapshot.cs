@@ -1,12 +1,12 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
-using EClassBook.Data.Context;
-
-namespace EClassBook.API.Migrations
+﻿namespace EClassBook.API.Migrations
 {
+    using System;
+    using Data;
+
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Infrastructure;
+    using Microsoft.EntityFrameworkCore.Metadata;
+
     [DbContext(typeof(EBookContext))]
     partial class EBookContextModelSnapshot : ModelSnapshot
     {

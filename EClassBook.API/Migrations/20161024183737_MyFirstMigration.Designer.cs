@@ -1,12 +1,13 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
-using EClassBook.Data.Context;
-
-namespace EClassBook.API.Migrations
+﻿namespace EClassBook.API.Migrations
 {
+    using System;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Infrastructure;
+    using Microsoft.EntityFrameworkCore.Metadata;
+    using Microsoft.EntityFrameworkCore.Migrations;
+    using EClassBook.Data;
+
+
     [DbContext(typeof(EBookContext))]
     [Migration("20161024183737_MyFirstMigration")]
     partial class MyFirstMigration

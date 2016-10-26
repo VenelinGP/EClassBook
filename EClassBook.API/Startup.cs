@@ -1,20 +1,19 @@
 ﻿namespace EClassBook.API
 {
+    using System.IO;
+    using Data;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+
     using Microsoft.Extensions.Logging;
-    using System.IO;
-    using Data.Context;
-    using Microsoft.EntityFrameworkCore;
-    using Data;
 
     public class Startup
     {
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
-
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -28,7 +27,8 @@
                 // This will push telemetry data through Application Insights pipeline faster, allowing you to view results immediately.
                 builder.AddApplicationInsightsSettings(developerMode: true);
             }
-            Configuration = builder.Build();
+
+            this.Configuration = builder.Build();
         }
 
         public Microsoft.Extensions.Configuration.IConfigurationRoot Configuration { get; set; }
@@ -36,10 +36,9 @@
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddDbContext<EBookContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("EClassBookDatabase"),
+            services.AddDbContext<EBookContext>(options => options
+                .UseSqlServer(this.Configuration.GetConnectionString("EClassBookDatabase"),
                 b => b.MigrationsAssembly("EClassBook.API")));
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -67,6 +66,5 @@
             app.UseMvc();
             PersonDbInitializer.Initialize(app.ApplicationServices);
         }
-
     }
 }
