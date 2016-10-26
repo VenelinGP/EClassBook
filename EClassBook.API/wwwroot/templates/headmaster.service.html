@@ -3,7 +3,7 @@
     <li>
         <strong>{{headmasters.name}}</strong><br>
         from: {{address.city}}<br>
-        account: <template [ngIf]="role.name > 10">admin</template>
+        account: <template [ngIf]="role.name == 10">admin</template>
     </li>
     <br>
 </ul>

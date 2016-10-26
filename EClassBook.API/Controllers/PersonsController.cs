@@ -20,9 +20,9 @@
 
         // GET: /<controller>/
         [HttpGet]
-        public IEnumerable<Person> GetPersons()
+        public IEnumerable<Headmaster> GetPersons()
         {
-            return this.context.Persons.ToList();
+            return this.context.Headmasters.ToList();
         }
     }
 }

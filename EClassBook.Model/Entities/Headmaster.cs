@@ -1,10 +1,12 @@
 ﻿namespace EClassBook.Model.Entities
 {
-    public class Headmaster
-    {
-        public int HeadmasterId { get; set; }
+    using Common.Models;
 
+    public class Headmaster : BaseModel<int>
+    {
         public string Name { get; set; }
+
+        public string Password { get; set; }
 
         public int AddressId { get; set; }
 

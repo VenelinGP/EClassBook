@@ -38,7 +38,7 @@
             services.AddMvc();
             services.AddDbContext<EBookContext>(options => options
                 .UseSqlServer(this.Configuration.GetConnectionString("EClassBookDatabase"),
-                b => b.MigrationsAssembly("EClassBook.API")));
+                b => b.MigrationsAssembly("EClassBook.Data")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

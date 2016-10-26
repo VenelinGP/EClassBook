@@ -1,8 +1,10 @@
 ﻿namespace EClassBook.Model.Entities
 {
     using System.Collections.Generic;
+    using Common.Models;
 
-    public class Teacher
+
+    public class Teacher : BaseModel<int>
     {
         private ICollection<Course> courses;
 
@@ -11,9 +13,9 @@
             this.courses = new HashSet<Course>();
         }
 
-        public int TeacherId { get; set; }
-
         public string Name { get; set; }
+
+        public string Password { get; set; }
 
         public int AddressId { get; set; }
 

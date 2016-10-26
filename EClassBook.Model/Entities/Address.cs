@@ -1,9 +1,9 @@
 ﻿namespace EClassBook.Model.Entities
 {
-    public class Address
-    {
-        public int AddressId { get; set; }
+    using Common.Models;
 
+    public class Address : BaseModel<int>
+    {
         public string City { get; set; }
 
         public string Street { get; set; }

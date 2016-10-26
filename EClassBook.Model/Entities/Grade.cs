@@ -1,11 +1,10 @@
 ﻿namespace EClassBook.Model.Entities
 {
     using System;
+    using Common.Models;
 
-    public class Grade
+    public class Grade :BaseModel<int>
     {
-        public int GradeId { get; set; }
-
         public DateTime Date { get; set; }
 
         public GradeEnum GradeValue { get; set; }

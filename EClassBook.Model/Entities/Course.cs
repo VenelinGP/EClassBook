@@ -1,9 +1,9 @@
 ﻿namespace EClassBook.Model.Entities
 {
-    public class Course
-    {
-        public int CourseId { get; set; }
+    using Common.Models;
 
+    public class Course : BaseModel<int>
+    {
         public string Name { get; set; }
 
         public int TeacherId { get; set; }

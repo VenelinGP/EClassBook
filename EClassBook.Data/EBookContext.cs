@@ -14,8 +14,6 @@
         {
         }
 
-        public DbSet<Person> Persons { get; set; }
-
         public DbSet<Headmaster> Headmasters { get; set; }
 
         public DbSet<Teacher> Teachers { get; set; }

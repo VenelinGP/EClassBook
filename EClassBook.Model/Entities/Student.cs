@@ -2,8 +2,10 @@
 {
     using System;
     using System.Collections.Generic;
+    using Common.Models;
 
-    public class Student
+
+    public class Student : BaseModel<int>
     {
         private ICollection<Grade> grades;
 
@@ -12,9 +14,9 @@
             this.grades = new HashSet<Grade>();
         }
 
-        public int StudentId { get; set; }
-
         public string Name { get; set; }
+
+        public string Password { get; set; }
 
         public int AddressId { get; set; }
 
