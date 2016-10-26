@@ -5,12 +5,14 @@
 
     using Microsoft.AspNetCore.Mvc;
     using Model.Entities;
+    using Common;
 
     [Route("api/[controller]")]
     [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true, Duration = -1)]
     public class HeadmastersController : Controller
     {
         private EBookContext context;
+        private IDbRepository<Headmaster> headmasters;
 
         public HeadmastersController(EBookContext context)
         {

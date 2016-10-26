@@ -1,13 +1,16 @@
 ﻿namespace EClassBook.API
 {
+    using System;
     using System.IO;
+    using Autofac;
+    using Autofac.Extensions.DependencyInjection;
+    using Common;
     using Data;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-
     using Microsoft.Extensions.Logging;
 
     public class Startup
@@ -31,14 +34,32 @@
             this.Configuration = builder.Build();
         }
 
-        public Microsoft.Extensions.Configuration.IConfigurationRoot Configuration { get; set; }
+        public IContainer ApplicationContainer { get; private set; }
 
-        public void ConfigureServices(IServiceCollection services)
+        public IConfigurationRoot Configuration { get; set; }
+
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
             services.AddDbContext<EBookContext>(options => options
                 .UseSqlServer(this.Configuration.GetConnectionString("EClassBookDatabase"),
                 b => b.MigrationsAssembly("EClassBook.Data")));
+
+            // Create the container builder.
+            var builder = new ContainerBuilder();
+
+            // Register dependencies, populate the services from
+            // the collection, and build the container. If you want
+            // to dispose of the container at the end of the app,
+            // be sure to keep a reference to it as a property or field.
+            //builder.RegisterType<MyType>().As<IMyType>();
+            builder.RegisterGeneric(typeof(DbRepository<>))
+                .As(typeof(IDbRepository<>))
+                .InstancePerRequest();
+            builder.Populate(services);
+            this.ApplicationContainer = builder.Build();
+
+            return new AutofacServiceProvider(this.ApplicationContainer);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
