@@ -6,9 +6,11 @@
     using Common.Models;
     using Microsoft.EntityFrameworkCore;
     using Model;
+    using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
     public class EBookContext : DbContext
     {
+
         public EBookContext(DbContextOptions<EBookContext> options)
             : base(options)
         {
@@ -34,6 +36,36 @@
         {
             this.ApplyAuditInfoRules();
             return base.SaveChanges();
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            foreach (var entity in modelBuilder.Model.GetEntityTypes())
+            {
+                entity.Relational().TableName = entity.DisplayName();
+            }
+            // Address
+            // Course
+            // Error
+            // Grade
+            // Headmaster
+            modelBuilder.Entity<Headmaster>().Property(h => h.Username).IsRequired().HasMaxLength(20);
+            modelBuilder.Entity<Headmaster>().Property(h => h.AddressId).IsRequired();
+
+            // Teacher
+            modelBuilder.Entity<Teacher>().Property(t => t.Username).IsRequired().HasMaxLength(20);
+            modelBuilder.Entity<Teacher>().Property(t => t.AddressId).IsRequired();
+
+            // Student
+            modelBuilder.Entity<Student>().Property(s => s.Username).IsRequired().HasMaxLength(20);
+            modelBuilder.Entity<Student>().Property(s => s.AddressId).IsRequired();
+
+            // UserRole
+            modelBuilder.Entity<UserRole>().Property(ur => ur.UserId).IsRequired();
+            modelBuilder.Entity<UserRole>().Property(ur => ur.RoleId).IsRequired();
+
+            // Role
+            modelBuilder.Entity<Role>().Property(r => r.Name).IsRequired().HasMaxLength(50);
         }
         private void ApplyAuditInfoRules()
         {

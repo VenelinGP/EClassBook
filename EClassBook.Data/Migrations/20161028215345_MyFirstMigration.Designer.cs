@@ -8,8 +8,8 @@ using EClassBook.Data;
 namespace EClassBook.Data.Migrations
 {
     [DbContext(typeof(EBookContext))]
-    [Migration("20161026125321_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20161028215345_MyFirstMigration")]
+    partial class MyFirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -17,7 +17,7 @@ namespace EClassBook.Data.Migrations
                 .HasAnnotation("ProductVersion", "1.0.1")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("EClassBook.Model.Entities.Address", b =>
+            modelBuilder.Entity("EClassBook.Model.Address", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -27,6 +27,8 @@ namespace EClassBook.Data.Migrations
                     b.Property<DateTime>("CreatedOn");
 
                     b.Property<DateTime?>("DeletedOn");
+
+                    b.Property<string>("Email");
 
                     b.Property<bool>("IsDeleted");
 
@@ -41,7 +43,7 @@ namespace EClassBook.Data.Migrations
                     b.ToTable("Address");
                 });
 
-            modelBuilder.Entity("EClassBook.Model.Entities.Course", b =>
+            modelBuilder.Entity("EClassBook.Model.Course", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -62,10 +64,10 @@ namespace EClassBook.Data.Migrations
 
                     b.HasIndex("TeacherId");
 
-                    b.ToTable("Courses");
+                    b.ToTable("Course");
                 });
 
-            modelBuilder.Entity("EClassBook.Model.Entities.Grade", b =>
+            modelBuilder.Entity("EClassBook.Model.Grade", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -92,10 +94,10 @@ namespace EClassBook.Data.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("Grades");
+                    b.ToTable("Grade");
                 });
 
-            modelBuilder.Entity("EClassBook.Model.Entities.Headmaster", b =>
+            modelBuilder.Entity("EClassBook.Model.Headmaster", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -106,26 +108,32 @@ namespace EClassBook.Data.Migrations
 
                     b.Property<DateTime?>("DeletedOn");
 
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("HashedPassword");
+
                     b.Property<bool>("IsDeleted");
+
+                    b.Property<bool>("IsLocked");
+
+                    b.Property<string>("LastName");
 
                     b.Property<DateTime?>("ModifiedOn");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Salt");
 
-                    b.Property<string>("Password");
-
-                    b.Property<int>("RoleId");
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 20);
 
                     b.HasKey("Id");
 
                     b.HasIndex("AddressId");
 
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("Headmasters");
+                    b.ToTable("Headmaster");
                 });
 
-            modelBuilder.Entity("EClassBook.Model.Entities.Role", b =>
+            modelBuilder.Entity("EClassBook.Model.Role", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -138,14 +146,15 @@ namespace EClassBook.Data.Migrations
 
                     b.Property<DateTime?>("ModifiedOn");
 
-                    b.Property<int>("Name");
+                    b.Property<int>("Name")
+                        .HasAnnotation("MaxLength", 50);
 
                     b.HasKey("Id");
 
-                    b.ToTable("Roles");
+                    b.ToTable("Role");
                 });
 
-            modelBuilder.Entity("EClassBook.Model.Entities.Student", b =>
+            modelBuilder.Entity("EClassBook.Model.Student", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -160,15 +169,27 @@ namespace EClassBook.Data.Migrations
 
                     b.Property<DateTime?>("DeletedOn");
 
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("HashedPassword");
+
                     b.Property<bool>("IsDeleted");
+
+                    b.Property<bool>("IsLoked");
+
+                    b.Property<string>("LastName");
 
                     b.Property<DateTime?>("ModifiedOn");
 
                     b.Property<string>("Name");
 
-                    b.Property<string>("Password");
-
                     b.Property<int>("RoleId");
+
+                    b.Property<string>("Salt");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 20);
 
                     b.HasKey("Id");
 
@@ -176,10 +197,10 @@ namespace EClassBook.Data.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("Students");
+                    b.ToTable("Student");
                 });
 
-            modelBuilder.Entity("EClassBook.Model.Entities.Teacher", b =>
+            modelBuilder.Entity("EClassBook.Model.Teacher", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -190,82 +211,134 @@ namespace EClassBook.Data.Migrations
 
                     b.Property<DateTime?>("DeletedOn");
 
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("HashedPassword");
+
                     b.Property<bool>("IsDeleted");
+
+                    b.Property<bool>("IsLoked");
+
+                    b.Property<string>("LastName");
 
                     b.Property<DateTime?>("ModifiedOn");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Salt");
 
-                    b.Property<string>("Password");
-
-                    b.Property<int>("RoleId");
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 20);
 
                     b.HasKey("Id");
 
                     b.HasIndex("AddressId");
 
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("Teachers");
+                    b.ToTable("Teacher");
                 });
 
-            modelBuilder.Entity("EClassBook.Model.Entities.Course", b =>
+            modelBuilder.Entity("EClassBook.Model.UserRole", b =>
                 {
-                    b.HasOne("EClassBook.Model.Entities.Teacher", "Teacher")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<DateTime?>("DeletedOn");
+
+                    b.Property<int?>("HeadmasterId");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<DateTime?>("ModifiedOn");
+
+                    b.Property<int>("RoleId");
+
+                    b.Property<int?>("StudentId");
+
+                    b.Property<int?>("TeacherId");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HeadmasterId");
+
+                    b.HasIndex("RoleId");
+
+                    b.HasIndex("StudentId");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("UserRole");
+                });
+
+            modelBuilder.Entity("EClassBook.Model.Course", b =>
+                {
+                    b.HasOne("EClassBook.Model.Teacher", "Teacher")
                         .WithMany("Courses")
                         .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("EClassBook.Model.Entities.Grade", b =>
+            modelBuilder.Entity("EClassBook.Model.Grade", b =>
                 {
-                    b.HasOne("EClassBook.Model.Entities.Course", "Course")
+                    b.HasOne("EClassBook.Model.Course", "Course")
                         .WithMany()
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("EClassBook.Model.Entities.Student")
+                    b.HasOne("EClassBook.Model.Student")
                         .WithMany("Grades")
                         .HasForeignKey("StudentId");
                 });
 
-            modelBuilder.Entity("EClassBook.Model.Entities.Headmaster", b =>
+            modelBuilder.Entity("EClassBook.Model.Headmaster", b =>
                 {
-                    b.HasOne("EClassBook.Model.Entities.Address", "Address")
+                    b.HasOne("EClassBook.Model.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("EClassBook.Model.Student", b =>
+                {
+                    b.HasOne("EClassBook.Model.Address", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("EClassBook.Model.Entities.Role", "Role")
+                    b.HasOne("EClassBook.Model.Role", "Role")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("EClassBook.Model.Entities.Student", b =>
+            modelBuilder.Entity("EClassBook.Model.Teacher", b =>
                 {
-                    b.HasOne("EClassBook.Model.Entities.Address", "Address")
+                    b.HasOne("EClassBook.Model.Address", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("EClassBook.Model.Entities.Role", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("EClassBook.Model.Entities.Teacher", b =>
+            modelBuilder.Entity("EClassBook.Model.UserRole", b =>
                 {
-                    b.HasOne("EClassBook.Model.Entities.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("EClassBook.Model.Headmaster")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("HeadmasterId");
 
-                    b.HasOne("EClassBook.Model.Entities.Role", "Role")
+                    b.HasOne("EClassBook.Model.Role", "Role")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("EClassBook.Model.Student")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("StudentId");
+
+                    b.HasOne("EClassBook.Model.Teacher")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("TeacherId");
                 });
         }
     }

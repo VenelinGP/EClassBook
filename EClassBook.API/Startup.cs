@@ -1,10 +1,6 @@
 ﻿namespace EClassBook.API
 {
-    using System;
     using System.IO;
-    using Autofac;
-    using Autofac.Extensions.DependencyInjection;
-    using Common;
     using Data;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -12,7 +8,6 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
-    using Model.Repositories;
     using Common.Models;
     using Data.Repositories;
     using Data.Contracts;
@@ -42,7 +37,7 @@
             {
                 // This will push telemetry data through Application Insights pipeline faster,
                 // allowing you to view results immediately.
-                builder.AddApplicationInsightsSettings(developerMode: true);
+                //builder.AddApplicationInsightsSettings(developerMode: true);
                 // This reads the configuration keys from the secret store.
                 // For more details on using the user secret store see http://go.microsoft.com/fwlink/?LinkID=532709
                 builder.AddUserSecrets();

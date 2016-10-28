@@ -24,6 +24,14 @@
                 new Role()
                 {
                     Name=RoleEnum.Admin
+                },
+                new Role()
+                {
+                    Name=RoleEnum.Teacher
+                },
+                new Role()
+                {
+                    Name=RoleEnum.Student
                 }
                 });
 
@@ -56,7 +64,7 @@
                 context.UserRoles.AddRange(new UserRole[] {
                 new UserRole() {
                     RoleId = 1, // admin
-                    UserId = 1  // chsakell
+                    UserId = 1  // Venelin
                 }
             });
                 context.SaveChanges();

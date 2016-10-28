@@ -32,6 +32,8 @@
 
         public bool IsLoked { get; set; }
 
+        public int AddressId { get; set; }
+
         public virtual Address Address { get; set; }
 
         public int RoleId { get; set; }

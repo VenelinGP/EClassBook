@@ -9,7 +9,7 @@ export class HeadmasterService {
     constructor(private _http: Http) { }
 
     loadData(): Promise<Headmaster[]> {
-        return this._http.get('/api/home')
+        return this._http.get('/api/headmaster')
             .toPromise()
             .then(response => this.extractArray(response))
             .catch(this.handleErrorPromise);
@@ -17,8 +17,9 @@ export class HeadmasterService {
 
     protected extractArray(res: Response, showprogress: boolean = true) {
         let data = res.json();
-        let address = data['address'];
-        console.log(address.city);
+        let address = data['Address'];
+        let role = data['Role'];
+        console.log(data.FirstName);
         return data || [];
     }
 
@@ -44,7 +45,8 @@ export class HeadmasterService {
 
 }
 export interface Headmaster {
-    name: string;
-    addressId: number;
-    roleId: number;
+    FirstName: string;
+    LastName: string;
+    AddressId: number;
+    RoleId: number;
 }

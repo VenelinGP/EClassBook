@@ -19,8 +19,8 @@ export class AppComponent extends OnInit {
     ngOnInit() {
         this._service.loadData().then(data => {
             this.headmasters = data;
-            this.address = data['address'];
-            this.role = data['role'];
+            this.address = data['Address'];
+            this.role = data['Role'];
         })
     }
     headmasters: Headmaster[] = [];
