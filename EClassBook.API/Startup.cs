@@ -87,7 +87,7 @@
                 routes.MapWebApiRoute("defaultApi", "api/{controller}/{id?}");
             });
 
-            PersonDbInitializer.Initialize(app.ApplicationServices);
+            DbInitializer.Initialize(app.ApplicationServices);
         }
     }
 }

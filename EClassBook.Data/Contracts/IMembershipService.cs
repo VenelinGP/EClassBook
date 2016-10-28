@@ -7,7 +7,7 @@
     public interface IMembershipService
     {
         MembershipContext ValidateUser(string username, string password);
-        Headmaster CreateUser(string username, string email, string password, int[] roles);
+        Headmaster CreateUser(string username, string firstName, string lastName, string email, string password, int[] roles);
         Headmaster GetUser(int userId);
         List<Role> GetUserRoles(string username);
     }

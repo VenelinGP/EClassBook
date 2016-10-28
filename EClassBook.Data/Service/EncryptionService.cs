@@ -11,7 +11,7 @@
         {
             var data = new byte[0x10];
 
-            var cryptoServiceProvider = System.Security.Cryptography.RandomNumberGenerator.Create();
+            var cryptoServiceProvider = RandomNumberGenerator.Create();
             cryptoServiceProvider.GetBytes(data);
             return Convert.ToBase64String(data);
         }
