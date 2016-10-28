@@ -2,7 +2,7 @@
 {
     using Common.Models;
 
-    public class Course : BaseModel<int>
+    public class Course : BaseModel
     {
         public string Name { get; set; }
 

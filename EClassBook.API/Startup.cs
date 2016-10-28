@@ -47,11 +47,8 @@
 
             // Create the container builder.
             var builder = new ContainerBuilder();
+            //builder.RegisterModule(new AutofacModule());
 
-            // Register dependencies, populate the services from
-            // the collection, and build the container. If you want
-            // to dispose of the container at the end of the app,
-            // be sure to keep a reference to it as a property or field.
             //builder.RegisterType<MyType>().As<IMyType>();
             builder.RegisterGeneric(typeof(DbRepository<>))
                 .As(typeof(IDbRepository<>))
@@ -84,7 +81,11 @@
                 }
             });
             app.UseStaticFiles();
-            app.UseMvc();
+            app.UseMvc(routes =>
+            {
+                routes.MapWebApiRoute("defaultApi", "api/{controller}/{id?}");
+            });
+
             PersonDbInitializer.Initialize(app.ApplicationServices);
         }
     }

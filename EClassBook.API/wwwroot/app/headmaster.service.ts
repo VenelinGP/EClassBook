@@ -9,7 +9,7 @@ export class HeadmasterService {
     constructor(private _http: Http) { }
 
     loadData(): Promise<Headmaster[]> {
-        return this._http.get('/api/headmasters')
+        return this._http.get('/api/home')
             .toPromise()
             .then(response => this.extractArray(response))
             .catch(this.handleErrorPromise);

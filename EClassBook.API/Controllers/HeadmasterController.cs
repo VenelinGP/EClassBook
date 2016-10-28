@@ -9,14 +9,15 @@
 
     [Route("api/[controller]")]
     [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true, Duration = -1)]
-    public class HeadmastersController : Controller
+    public class HeadmasterController : Controller
     {
         private EBookContext context;
-        private IDbRepository<Headmaster> headmasters;
+        //private IDbRepository<Headmaster> headmaster;
 
-        public HeadmastersController(EBookContext context)
+        public HeadmasterController(EBookContext context)
         {
             this.context = context;
+            //this.headmaster = headmaster;
         }
 
         // GET: api/values

@@ -3,7 +3,7 @@
     using System;
     using Common.Models;
 
-    public class Grade :BaseModel<int>
+    public class Grade :BaseModel
     {
         public DateTime Date { get; set; }
 

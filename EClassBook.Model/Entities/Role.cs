@@ -2,7 +2,7 @@
 {
     using Common.Models;
 
-    public class Role : BaseModel<int>
+    public class Role : BaseModel
     {
         public RoleEnum Name { get; set; }
     }

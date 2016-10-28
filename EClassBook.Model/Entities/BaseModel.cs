@@ -3,11 +3,12 @@
     using System;
     using System.ComponentModel.DataAnnotations;
     using Microsoft.EntityFrameworkCore.Metadata.Internal;
+    using Models;
 
-    public abstract class BaseModel<TKey> : IAuditInfo, IDeletableEntity
+    public abstract class BaseModel : IBaseModel, IAuditInfo, IDeletableEntity
     {
         [Key]
-        public TKey Id { get; set; }
+        public int Id { get; set; }
 
         public DateTime CreatedOn { get; set; }
 
