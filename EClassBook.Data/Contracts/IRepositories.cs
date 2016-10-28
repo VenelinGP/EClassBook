@@ -9,7 +9,7 @@
 
     public interface ILoggingRepository : IEntityBaseRepository<Error> { }
 
-    public interface IPhotoRepository : IEntityBaseRepository<Grade> { }
+    public interface IGradeRepository : IEntityBaseRepository<Grade> { }
 
     public interface IHeadmasterRepository : IEntityBaseRepository<Headmaster>
     {

@@ -12,6 +12,7 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
+    using Model.Repositories;
 
     public class Startup
     {
@@ -50,8 +51,8 @@
             //builder.RegisterModule(new AutofacModule());
 
             //builder.RegisterType<MyType>().As<IMyType>();
-            builder.RegisterGeneric(typeof(DbRepository<>))
-                .As(typeof(IDbRepository<>))
+            builder.RegisterGeneric(typeof(EntityBaseRepository<>))
+                .As(typeof(IEntityBaseRepository<>))
                 .InstancePerRequest();
             builder.Populate(services);
             this.ApplicationContainer = builder.Build();

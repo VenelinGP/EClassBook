@@ -3,6 +3,7 @@
     using System;
     using System.Linq;
     using Model.Entities;
+    using System.Collections.Generic;
 
     public class PersonDbInitializer
     {
@@ -36,9 +37,10 @@
             if (!context.Headmasters.Any())
             {
                 Console.WriteLine("Here");
-                Role role = new Role { Name = RoleEnum.Admin };
+                var role = new List<UserRole>();
+                    role.Add( new UserRole() { UserId = 1 } );
                 Address address = new Address { City = "Sofia", Street = "31, Al. Malinov blvd", PhoneNumber = "0888308000" };
-                Headmaster headmaster_01 = new Headmaster { Name = "Max Musterman", Address = address, Role = role };
+                Headmaster headmaster_01 = new Headmaster { FirstName = "Max", LastName ="Musterman", Address = address, UserRoles = role };
                 context.Headmasters.Add(headmaster_01);
                 context.SaveChanges();
             }
