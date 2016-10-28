@@ -2,7 +2,7 @@
 {
     using System;
     using System.Linq;
-    using Model.Entities;
+    using Model;
     using System.Collections.Generic;
 
     public class PersonDbInitializer

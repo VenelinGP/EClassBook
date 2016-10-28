@@ -3,7 +3,6 @@
     using System;
     using System.ComponentModel.DataAnnotations;
     using Microsoft.EntityFrameworkCore.Metadata.Internal;
-    using Models;
 
     public abstract class BaseModel : IBaseModel, IAuditInfo, IDeletableEntity
     {

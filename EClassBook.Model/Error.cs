@@ -1,7 +1,6 @@
-﻿namespace EClassBook.Model.Entities
+﻿namespace EClassBook.Model
 {
     using Common.Models;
-    using System;
 
     public class Error : BaseModel
     {

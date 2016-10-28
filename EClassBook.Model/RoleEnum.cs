@@ -1,4 +1,4 @@
-﻿namespace EClassBook.Model.Entities
+﻿namespace EClassBook.Model
 {
     public enum RoleEnum
     {

@@ -5,7 +5,7 @@
     using Data;
 
     using Microsoft.AspNetCore.Mvc;
-    using Model.Entities;
+    using Model;
 
     [Route("api/persons")]
     [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true, Duration = -1)]

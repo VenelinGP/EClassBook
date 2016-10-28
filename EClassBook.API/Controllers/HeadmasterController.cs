@@ -4,7 +4,7 @@
     using Data;
 
     using Microsoft.AspNetCore.Mvc;
-    using Model.Entities;
+    using Model;
     using Common;
 
     [Route("api/[controller]")]

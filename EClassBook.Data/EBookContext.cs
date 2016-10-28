@@ -5,7 +5,7 @@
 
     using Common.Models;
     using Microsoft.EntityFrameworkCore;
-    using Model.Entities;
+    using Model;
 
     public class EBookContext : DbContext
     {

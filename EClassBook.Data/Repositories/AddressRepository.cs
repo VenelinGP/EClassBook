@@ -1,7 +1,7 @@
 ﻿namespace EClassBook.Data.Repositories
 {
     using Common.Models;
-    using Model.Entities;
+    using Model;
     using Model.Repositories;
 
     public class AddressRepository : EntityBaseRepository<Address>, IAddressRepository

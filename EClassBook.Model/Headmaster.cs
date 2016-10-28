@@ -1,4 +1,4 @@
-﻿namespace EClassBook.Model.Entities
+﻿namespace EClassBook.Model
 {
     using Common.Models;
     using System.Collections.Generic;
@@ -21,7 +21,7 @@
 
         public string Salt { get; set; }
 
-        public bool IsLoked { get; set; }
+        public bool IsLocked { get; set; }
 
         public int AddressId { get; set; }
 
