@@ -16,17 +16,17 @@
         {
         }
 
-        public DbSet<Headmaster> Headmasters { get; set; }
-
-        public DbSet<Teacher> Teachers { get; set; }
-
-        public DbSet<Student> Students { get; set; }
+        public DbSet<User> User { get; set; }
 
         public DbSet<Address> Address { get; set; }
 
-        public DbSet<Grade> Grades { get; set; }
+        public DbSet<Class> Classes { get; set; }
 
         public DbSet<Course> Courses { get; set; }
+
+        public DbSet<Error> Errors { get; set; }
+
+        public DbSet<Grade> Grades { get; set; }
 
         public DbSet<Role> Roles { get; set; }
 
@@ -44,29 +44,23 @@
             {
                 entity.Relational().TableName = entity.DisplayName();
             }
+            // User
+            modelBuilder.Entity<User>().Property(h => h.Username).IsRequired().HasMaxLength(20);
+            modelBuilder.Entity<User>().Property(h => h.AddressId).IsRequired();
+
             // Address
+            // Class
             // Course
             // Error
             // Grade
-            // Headmaster
-            modelBuilder.Entity<Headmaster>().Property(h => h.Username).IsRequired().HasMaxLength(20);
-            modelBuilder.Entity<Headmaster>().Property(h => h.AddressId).IsRequired();
-
-            // Teacher
-            modelBuilder.Entity<Teacher>().Property(t => t.Username).IsRequired().HasMaxLength(20);
-            modelBuilder.Entity<Teacher>().Property(t => t.AddressId).IsRequired();
-
-            // Student
-            modelBuilder.Entity<Student>().Property(s => s.Username).IsRequired().HasMaxLength(20);
-            modelBuilder.Entity<Student>().Property(s => s.AddressId).IsRequired();
+            // Role
+            modelBuilder.Entity<Role>().Property(r => r.Name).IsRequired().HasMaxLength(50);
 
             // UserRole
             modelBuilder.Entity<UserRole>().Property(ur => ur.UserId).IsRequired();
             modelBuilder.Entity<UserRole>().Property(ur => ur.RoleId).IsRequired();
-
-            // Role
-            modelBuilder.Entity<Role>().Property(r => r.Name).IsRequired().HasMaxLength(50);
         }
+
         private void ApplyAuditInfoRules()
         {
             // Approach via @julielerman: http://bit.ly/123661P
@@ -88,6 +82,4 @@
             }
         }
     }
-
 }
-

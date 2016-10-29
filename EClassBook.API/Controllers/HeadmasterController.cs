@@ -22,14 +22,14 @@
 
         // GET: api/values
         [HttpGet]
-        public Headmaster Get()
+        public User Get()
         {
-            var result = this.context.Headmasters.ToList();
-            var headmaster = result.FirstOrDefault();
+            var result = this.context.User.ToList();
+            var user = result.FirstOrDefault();
             var address = this.context.Address.ToList()[0];
             var role = this.context.Roles.ToList()[0];
-            return headmaster;
-            // return _context.Headmasters.ToList();
+            return user;
+            // return _context.user.ToList();
         }
 
         // GET api/values/5

@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace EClassBook.Common.Models
+﻿namespace EClassBook.Common.Models
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+
     public interface IBaseModel
     {
-       int Id { get; set; }
+        [Key]
+        int Id { get; set; }
 
         DateTime CreatedOn { get; set; }
 

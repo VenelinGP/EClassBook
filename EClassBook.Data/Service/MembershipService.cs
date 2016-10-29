@@ -10,16 +10,18 @@
 
     public class MembershipService : IMembershipService
     {
- 
-        private readonly IHeadmasterRepository headmasterRepository;
+
+        private readonly IUserRepository userRepository;
         private readonly IRoleRepository roleRepository;
         private readonly IUserRoleRepository userRoleRepository;
         private readonly IEncryptionService encryptionService;
 
-        public MembershipService(IHeadmasterRepository headmasterRepository, IRoleRepository roleRepository,
-        IUserRoleRepository userRoleRepository, IEncryptionService encryptionService)
+        public MembershipService(IUserRepository userRepository,
+                                IRoleRepository roleRepository,
+                                IUserRoleRepository userRoleRepository,
+                                IEncryptionService encryptionService)
         {
-            this.headmasterRepository = headmasterRepository;
+            this.userRepository = userRepository;
             this.roleRepository = roleRepository;
             this.userRoleRepository = userRoleRepository;
             this.encryptionService = encryptionService;
@@ -29,23 +31,23 @@
         {
             var membershipCtx = new MembershipContext();
 
-            var user = headmasterRepository.GetSingleByUsername(username);
+            var user = userRepository.GetSingleByUsername(username);
             if (user != null && isUserValid(user, password))
             {
                 var userRoles = GetUserRoles(user.Username);
                 membershipCtx.User = user;
 
                 var identity = new GenericIdentity(user.Username);
-                membershipCtx.Principal = new GenericPrincipal( 
+                membershipCtx.Principal = new GenericPrincipal(
                     identity,
                     userRoles.Select(x => x.Name.ToString()).ToArray());
             }
 
             return membershipCtx;
         }
-        public Headmaster CreateUser(string username, string firstName, string lastName, string email, string password, int[] roles)
+        public User CreateUser(string username, string firstName, string lastName, string email, string password, int[] roles)
         {
-            var existingUser = headmasterRepository.GetSingleByUsername(username);
+            var existingUser = userRepository.GetSingleByUsername(username);
 
             if (existingUser != null)
             {
@@ -57,7 +59,7 @@
             {
                 Email = email
             };
-            var headmaster = new Headmaster()
+            var user = new User()
             {
                 Username = username,
                 FirstName = firstName,
@@ -68,47 +70,46 @@
                 HashedPassword = encryptionService.EncryptPassword(password, passwordSalt)
             };
 
-            headmasterRepository.Add(headmaster);
+            userRepository.Add(user);
 
-            headmasterRepository.Commit();
+            userRepository.Commit();
 
             if (roles != null || roles.Length > 0)
             {
                 foreach (var role in roles)
                 {
-                    addUserToRole(headmaster, role);
+                    addUserToRole(user, role);
                 }
             }
 
-            headmasterRepository.Commit();
+            userRepository.Commit();
 
-            return headmaster;
+            return user;
         }
 
-        public Headmaster GetUser(int userId)
+        public User GetUser(int userId)
         {
-            return headmasterRepository.GetSingle(userId);
+            return userRepository.GetSingle(userId);
         }
 
         public List<Role> GetUserRoles(string username)
         {
-            List<Role> _result = new List<Role>();
+            List<Role> result = new List<Role>();
 
-            var existingUser = headmasterRepository.GetSingleByUsername(username);
+            var existingUser = userRepository.GetSingleByUsername(username);
 
             if (existingUser != null)
             {
                 foreach (var userRole in existingUser.UserRoles)
                 {
-                    _result.Add(userRole.Role);
+                    result.Add(userRole.Role);
                 }
             }
 
-            return _result.Distinct().ToList();
+            return result.Distinct().ToList();
         }
 
-        #region Helper methods
-        private void addUserToRole(Headmaster user, int roleId)
+        private void addUserToRole(User user, int roleId)
         {
             var role = roleRepository.GetSingle(roleId);
             if (role == null)
@@ -121,15 +122,15 @@
             };
             userRoleRepository.Add(userRole);
 
-            headmasterRepository.Commit();
+            userRepository.Commit();
         }
 
-        private bool isPasswordValid(Headmaster user, string password)
+        private bool isPasswordValid(User user, string password)
         {
             return string.Equals(encryptionService.EncryptPassword(password, user.Salt), user.HashedPassword);
         }
 
-        private bool isUserValid(Headmaster user, string password)
+        private bool isUserValid(User user, string password)
         {
             if (isPasswordValid(user, password))
             {
@@ -138,6 +139,5 @@
 
             return false;
         }
-        #endregion
     }
 }

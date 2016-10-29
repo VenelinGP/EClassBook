@@ -63,10 +63,7 @@
             services.AddScoped<IAddressRepository, AddressRepository>();
             services.AddScoped<ICourseRepository, CourseRepository>();
             services.AddScoped<IGradeRepository, GradeRepository>();
-            services.AddScoped<IHeadmasterRepository, HeadmasterRepository>();
-            services.AddScoped<ITeacherRepository, TeacherRepository>();
-            services.AddScoped<IStudentRepository, StudentRepository>();
-            services.AddScoped<IUserRoleRepository, UserRoleRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<ILoggingRepository, LoggingRepository>();
 

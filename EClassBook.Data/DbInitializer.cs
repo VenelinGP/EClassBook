@@ -3,7 +3,6 @@
     using System;
     using System.Linq;
     using Model;
-    using System.Collections.Generic;
 
     public class DbInitializer
     {
@@ -46,9 +45,9 @@
                     });
                 context.SaveChanges();
             }
-            if (!context.Headmasters.Any())
+            if (!context.User.Any())
             {
-                context.Headmasters.Add(new Headmaster()
+                context.User.Add(new User()
                 {
                     Username = "master",
                     FirstName = "Venelin",
@@ -61,27 +60,29 @@
                 // create user-addres for venelin
 
                 // create user-admin for venelin
-                context.UserRoles.AddRange(new UserRole[] {
-                new UserRole() {
-                    RoleId = 1, // admin
-                    UserId = 1  // Venelin
-                }
-            });
+                //context.UserRoles.AddRange(new UserRole[] {
+                //new UserRole() {
+                //    RoleId = 1, // admin
+                //    UserId = 1  // Venelin
                 context.SaveChanges();
             }
         }
-        //private static void InitializePersons()
-        //{
-        //    if (!context.Headmasters.Any())
-        //    {
-        //        Console.WriteLine("Here");
-        //        var role = new List<UserRole>();
-        //            role.Add( new UserRole() { UserId = 1 } );
-        //        Address address = new Address { City = "Sofia", Street = "31, Al. Malinov blvd", PhoneNumber = "0888308000" };
-        //        Headmaster headmaster_01 = new Headmaster { FirstName = "Max", LastName ="Musterman", Address = address, UserRoles = role };
-        //        context.Headmasters.Add(headmaster_01);
-        //        context.SaveChanges();
-        //    }
-        //}
+
+
     }
+
+    //private static void InitializePersons()
+    //{
+    //    if (!context.Headmasters.Any())
+    //    {
+    //        Console.WriteLine("Here");
+    //        var role = new List<UserRole>();
+    //            role.Add( new UserRole() { UserId = 1 } );
+    //        Address address = new Address { City = "Sofia", Street = "31, Al. Malinov blvd", PhoneNumber = "0888308000" };
+    //        Headmaster headmaster_01 = new Headmaster { FirstName = "Max", LastName ="Musterman", Address = address, UserRoles = role };
+    //        context.Headmasters.Add(headmaster_01);
+    //        context.SaveChanges();
+    //    }
+    //}
 }
+
