@@ -20,18 +20,9 @@
                 // create roles
                 context.Roles.AddRange(new Role[]
                 {
-                new Role()
-                {
-                    Name=RoleEnum.Admin
-                },
-                new Role()
-                {
-                    Name=RoleEnum.Teacher
-                },
-                new Role()
-                {
-                    Name=RoleEnum.Student
-                }
+                    new Role() { Name=RoleEnum.Admin },
+                    new Role() { Name=RoleEnum.Teacher },
+                    new Role() { Name=RoleEnum.Student }
                 });
 
                 context.SaveChanges();
@@ -41,7 +32,10 @@
                 context.Address.Add(
                     new Address()
                     {
-                        Email = "venelin.petkov@netcoms.eu"
+                        Email = "venelin.petkov@netcoms.eu",
+                        City = "Sliven",
+                        Street = "2, Petko Karavelov str.",
+                        PhoneNumber = "0889919030"
                     });
                 context.SaveChanges();
             }
@@ -59,16 +53,37 @@
                 });
                 // create user-addres for venelin
 
-                // create user-admin for venelin
-                //context.UserRoles.AddRange(new UserRole[] {
-                //new UserRole() {
-                //    RoleId = 1, // admin
-                //    UserId = 1  // Venelin
+                // create user - admin for venelin
+
+                context.UserRoles.AddRange(new UserRole[] {
+                    new UserRole() {
+                        RoleId = 1, // admin
+                        UserId = 1  // Venelin
+                    }
+                 });
+                context.SaveChanges();
+            }
+            if (!context.Courses.Any())
+            {
+                context.AddRange(new Course[]
+                {
+                    new Course() { Name="Български език" },
+                    new Course() { Name="Математика" },
+                    new Course() { Name="Физика" },
+                    new Course() { Name="Английски език" },
+                    new Course() { Name="География" },
+                    new Course() { Name="История" },
+                    new Course() { Name="Химия" },
+                    new Course() { Name="Биология" },
+                    new Course() { Name="Информационни технологии" },
+                    new Course() { Name="Изобразително изкуство" },
+                    new Course() { Name="Музика" },
+                    new Course() { Name="Физическо и спорт" },
+                });
+
                 context.SaveChanges();
             }
         }
-
-
     }
 
     //private static void InitializePersons()

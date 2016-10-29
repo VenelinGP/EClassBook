@@ -5,11 +5,11 @@ import { Observable } from "rxjs/Rx";
 import "rxjs/add/operator/toPromise";
 
 @Injectable()
-export class HeadmasterService {
+export class UserService {
     constructor(private _http: Http) { }
 
-    loadData(): Promise<Headmaster[]> {
-        return this._http.get('/api/headmaster')
+    loadData(): Promise<User[]> {
+        return this._http.get('/api/user')
             .toPromise()
             .then(response => this.extractArray(response))
             .catch(this.handleErrorPromise);
@@ -18,7 +18,7 @@ export class HeadmasterService {
     protected extractArray(res: Response, showprogress: boolean = true) {
         let data = res.json();
         let address = data['Address'];
-        let role = data['Role'];
+        //let role = data['Role'];
         console.log(data.FirstName);
         return data || [];
     }
@@ -44,9 +44,9 @@ export class HeadmasterService {
     }
 
 }
-export interface Headmaster {
+export interface User {
     FirstName: string;
     LastName: string;
-    AddressId: number;
+    Address: number;
     RoleId: number;
 }

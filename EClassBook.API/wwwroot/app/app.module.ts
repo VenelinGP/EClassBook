@@ -4,15 +4,15 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent }   from './app.component';
-import { HeadmasterService } from './headmaster.service';
+import { UserService } from './user.service';
 
 @NgModule({
     imports: [BrowserModule,
-        FormsModule,
-        HttpModule],
+            FormsModule,
+            HttpModule],
     declarations: [AppComponent],
     providers: [
-        HeadmasterService
+        UserService
     ],
     bootstrap: [AppComponent]
 })

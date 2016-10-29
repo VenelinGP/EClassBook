@@ -5,7 +5,7 @@
 
     public interface IAddressRepository : IEntityBaseRepository<Address> { }
 
-    public interface IClassRepository : IEntityBaseRepository<Class> { }
+    public interface IClassRepository : IEntityBaseRepository<ClassGroup> { }
 
     public interface ICourseRepository : IEntityBaseRepository<Course> { }
 

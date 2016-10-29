@@ -1,29 +1,29 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { HeadmasterService, Headmaster } from './headmaster.service';
+import { UserService, User } from './user.service';
 
 
 @Component({
     selector: 'my-app',
-    templateUrl: '../templates/headmaster.service.html',
+    templateUrl: '../templates/user.service.html',
 
     providers: [
-        HeadmasterService
+        UserService
     ]
 })
 export class AppComponent extends OnInit {
 
-    constructor(private _service: HeadmasterService) {
+    constructor(private _service: UserService) {
         super();
     }
 
     ngOnInit() {
         this._service.loadData().then(data => {
-            this.headmasters = data;
+            this.user = data;
             this.address = data['Address'];
             this.role = data['Role'];
         })
     }
-    headmasters: Headmaster[] = [];
-    address: Headmaster[] = [];
-    role: Headmaster[] = [];
+    user: User[] = [];
+    address: User[] = [];
+    role: User[] = [];
 }
