@@ -20,9 +20,9 @@
                 // create roles
                 context.Roles.AddRange(new Role[]
                 {
-                    new Role() { Name=RoleEnum.Admin },
-                    new Role() { Name=RoleEnum.Teacher },
-                    new Role() { Name=RoleEnum.Student }
+                    new Role() { Name="Admin" },
+                    new Role() { Name="Teacher" },
+                    new Role() { Name="Student" }
                 });
 
                 context.SaveChanges();
@@ -49,19 +49,20 @@
                     HashedPassword = "9wsmLgYM5Gu4zA/BSpxK2GIBEWzqMPKs8wl2WDBzH/4=",
                     Salt = "GTtKxJA6xJuj3ifJtTXn9Q==",
                     IsLocked = false,
-                    AddressId = 1
+                    AddressId = 1,
+                    RoleId = 1
                 });
                 // create user-addres for venelin
 
                 // create user - admin for venelin
 
-                context.UserRoles.AddRange(new UserRole[] {
-                    new UserRole() {
-                        RoleId = 1, // admin
-                        UserId = 1  // Venelin
-                    }
-                 });
-                context.SaveChanges();
+                //context.UserRoles.AddRange(new UserRole[] {
+                //    new UserRole() {
+                //        RoleId = 1, // admin
+                //        UserId = 1  // Venelin
+                //    }
+                // });
+                //context.SaveChanges();
             }
             if (!context.Courses.Any())
             {

@@ -30,8 +30,6 @@
 
         public DbSet<Role> Roles { get; set; }
 
-        public DbSet<UserRole> UserRoles { get; set; }
-
         public override int SaveChanges()
         {
             this.ApplyAuditInfoRules();
@@ -57,8 +55,8 @@
             modelBuilder.Entity<Role>().Property(r => r.Name).IsRequired().HasMaxLength(50);
 
             // UserRole
-            modelBuilder.Entity<UserRole>().Property(ur => ur.UserId).IsRequired();
-            modelBuilder.Entity<UserRole>().Property(ur => ur.RoleId).IsRequired();
+            //modelBuilder.Entity<UserRole>().Property(ur => ur.UserId).IsRequired();
+            //modelBuilder.Entity<UserRole>().Property(ur => ur.RoleId).IsRequired();
         }
 
         private void ApplyAuditInfoRules()

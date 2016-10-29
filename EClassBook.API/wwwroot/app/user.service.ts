@@ -18,7 +18,7 @@ export class UserService {
     protected extractArray(res: Response, showprogress: boolean = true) {
         let data = res.json();
         let address = data['Address'];
-        //let role = data['Role'];
+        let role = data['Role'];
         console.log(data.FirstName);
         return data || [];
     }
@@ -48,5 +48,5 @@ export interface User {
     FirstName: string;
     LastName: string;
     Address: number;
-    RoleId: number;
+    Role: string;
 }

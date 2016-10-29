@@ -7,7 +7,6 @@
     {
         private ICollection<Course> courses;
         private ICollection<Grade> grades;
-        private ICollection<UserRole> userRoles;
 
         public User()
         {
@@ -32,6 +31,11 @@
 
         public virtual Address Address { get; set; }
 
+        public int RoleId { get; set; }
+
+        public virtual Role Role { get; set; }
+
+
         public virtual ICollection<Course> Course
         {
             get { return this.courses; }
@@ -41,11 +45,6 @@
         {
             get { return this.grades; }
             set { this.grades = value; }
-        }
-        public virtual ICollection<UserRole> UserRoles
-        {
-            get { return this.userRoles; }
-            set { this.userRoles = value; }
         }
 
     }

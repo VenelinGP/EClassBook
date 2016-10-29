@@ -5,7 +5,6 @@
 
     using Microsoft.AspNetCore.Mvc;
     using Model;
-    using Common;
 
     [Route("api/[controller]")]
     [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true, Duration = -1)]
@@ -17,7 +16,6 @@
         public UserController(EBookContext context)
         {
             this.context = context;
-            //this.headmaster = headmaster;
         }
 
         // GET: api/values

@@ -16,10 +16,8 @@
     public interface IUserRepository : IEntityBaseRepository<User>
     {
         User GetSingleByUsername(string username);
-        IEnumerable<Role> GetUserRoles(string username);
+        Role GetUserRoles(string username);
     }
 
     public interface IRoleRepository : IEntityBaseRepository<Role> { }
-
-    public interface IUserRoleRepository : IEntityBaseRepository<UserRole> { }
 }

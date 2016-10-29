@@ -153,7 +153,8 @@ namespace EClassBook.Data.Migrations
 
                     b.Property<DateTime?>("ModifiedOn");
 
-                    b.Property<int>("Name")
+                    b.Property<string>("Name")
+                        .IsRequired()
                         .HasAnnotation("MaxLength", 50);
 
                     b.HasKey("Id");
@@ -186,6 +187,8 @@ namespace EClassBook.Data.Migrations
 
                     b.Property<DateTime?>("ModifiedOn");
 
+                    b.Property<int>("RoleId");
+
                     b.Property<string>("Salt");
 
                     b.Property<string>("Username")
@@ -197,6 +200,8 @@ namespace EClassBook.Data.Migrations
                     b.HasIndex("AddressId");
 
                     b.HasIndex("ClassGroupId");
+
+                    b.HasIndex("RoleId");
 
                     b.ToTable("User");
                 });
@@ -214,15 +219,11 @@ namespace EClassBook.Data.Migrations
 
                     b.Property<DateTime?>("ModifiedOn");
 
-                    b.Property<int>("RoleId");
-
-                    b.Property<int>("UserId");
+                    b.Property<int?>("RoleId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("RoleId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("UserRole");
                 });
@@ -257,19 +258,18 @@ namespace EClassBook.Data.Migrations
                     b.HasOne("EClassBook.Model.ClassGroup")
                         .WithMany("Users")
                         .HasForeignKey("ClassGroupId");
+
+                    b.HasOne("EClassBook.Model.Role", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("EClassBook.Model.UserRole", b =>
                 {
                     b.HasOne("EClassBook.Model.Role", "Role")
                         .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("EClassBook.Model.User")
-                        .WithMany("UserRoles")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("RoleId");
                 });
         }
     }

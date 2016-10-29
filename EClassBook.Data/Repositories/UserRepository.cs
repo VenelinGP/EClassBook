@@ -19,22 +19,27 @@
             return this.GetSingle(x => x.Username == username);
         }
 
-        public IEnumerable<Role> GetUserRoles(string username)
+        public Role GetUserRoles(string username)
         {
-            List<Role> roles = null;
+            //List<Role> roles = null;
 
-            User _user = this.GetSingle(u => u.Username == username, u => u.UserRoles);
-            if (_user != null)
+            //User user = this.GetSingle(u => u.Username == username, u => u.UserRoles);
+            //if (user != null)
+            //{
+            //    roles = new List<Role>();
+            //    foreach (var userRole in user.UserRoles)
+            //    {
+            //        roles.Add(roleReposistory.GetSingle(userRole.RoleId));
+            //    }
+
+            //}
+            Role roles = null;
+            User user = this.GetSingle(u => u.Username == username, u => u.Role);
+            if (user != null)
             {
-                roles = new List<Role>();
-                foreach (var userRole in _user.UserRoles)
-                {
-                    roles.Add(roleReposistory.GetSingle(userRole.RoleId));
-                }
-                    
+                roles = roleReposistory.GetSingle(user.RoleId);
             }
-
-            return roles;
+                return roles;
         }
     }
 }

@@ -34,13 +34,13 @@
             var user = userRepository.GetSingleByUsername(username);
             if (user != null && isUserValid(user, password))
             {
-                var userRoles = GetUserRoles(user.Username);
+                var userRole = GetUserRoles(user.Username);
                 membershipCtx.User = user;
-
+                string[] userRoles = new string[] { userRole.Name };
                 var identity = new GenericIdentity(user.Username);
                 membershipCtx.Principal = new GenericPrincipal(
                     identity,
-                    userRoles.Select(x => x.Name.ToString()).ToArray());
+                    userRoles);
             }
 
             return membershipCtx;
@@ -92,37 +92,34 @@
             return userRepository.GetSingle(userId);
         }
 
-        public List<Role> GetUserRoles(string username)
+        public Role GetUserRoles(string username)
         {
-            List<Role> result = new List<Role>();
+            Role result = new Role();
 
             var existingUser = userRepository.GetSingleByUsername(username);
 
             if (existingUser != null)
             {
-                foreach (var userRole in existingUser.UserRoles)
-                {
-                    result.Add(userRole.Role);
-                }
+                    result = existingUser.Role;
             }
 
-            return result.Distinct().ToList();
+            return result;
         }
 
         private void addUserToRole(User user, int roleId)
         {
-            var role = roleRepository.GetSingle(roleId);
-            if (role == null)
-                throw new Exception("Role doesn't exist.");
+            //var role = roleRepository.GetSingle(roleId);
+            //if (role == null)
+            //    throw new Exception("Role doesn't exist.");
 
-            var userRole = new UserRole()
-            {
-                RoleId = role.Id,
-                UserId = user.Id
-            };
-            userRoleRepository.Add(userRole);
+            //var userRole = new UserRole()
+            //{
+            //    RoleId = role.Id,
+            //    UserId = user.Id
+            //};
+            //userRoleRepository.Add(userRole);
 
-            userRepository.Commit();
+            //userRepository.Commit();
         }
 
         private bool isPasswordValid(User user, string password)

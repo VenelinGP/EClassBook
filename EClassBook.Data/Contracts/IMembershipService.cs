@@ -9,6 +9,6 @@
         MembershipContext ValidateUser(string username, string password);
         User CreateUser(string username, string firstName, string lastName, string email, string password, int[] roles);
         User GetUser(int userId);
-        List<Role> GetUserRoles(string username);
+        Role GetUserRoles(string username);
     }
 }
