@@ -13,14 +13,24 @@ const platform_browser_1 = require('@angular/platform-browser');
 const http_1 = require('@angular/http');
 const forms_1 = require('@angular/forms');
 const common_1 = require('@angular/common');
+const http_2 = require('@angular/http');
+const account_module_1 = require('./components/account/account.module');
 const app_component_1 = require('./app.component');
 const home_component_1 = require('./components/home.component');
-const user_component_1 = require('./components/user.component');
+//import { UserComponent } from './components/user.component';
 const routes_1 = require('./routes');
 const data_service_1 = require('./core/services/data.service');
 const membership_service_1 = require('./core/services/membership.service');
 const utility_service_1 = require('./core/services/utility.service');
 const notification_service_1 = require('./core/services/notification.service');
+class AppBaseRequestOptions extends http_2.BaseRequestOptions {
+    constructor() {
+        super();
+        this.headers = new http_2.Headers();
+        this.headers.append('Content-Type', 'application/json');
+        this.body = '';
+    }
+}
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -29,12 +39,13 @@ AppModule = __decorate([
             platform_browser_1.BrowserModule,
             forms_1.FormsModule,
             http_1.HttpModule,
-            routes_1.routing
+            routes_1.routing,
+            account_module_1.AccountModule
         ],
-        declarations: [app_component_1.AppComponent, home_component_1.HomeComponent, user_component_1.UserComponent],
+        declarations: [app_component_1.AppComponent, home_component_1.HomeComponent],
         providers: [data_service_1.DataService, membership_service_1.MembershipService, utility_service_1.UtilityService, notification_service_1.NotificationService,
-            { provide: common_1.LocationStrategy, useClass: common_1.HashLocationStrategy }],
-        //{ provide: RequestOptions, useClass: AppBaseRequestOptions }],
+            { provide: common_1.LocationStrategy, useClass: common_1.HashLocationStrategy },
+            { provide: http_2.RequestOptions, useClass: AppBaseRequestOptions }],
         bootstrap: [app_component_1.AppComponent]
     }), 
     __metadata('design:paramtypes', [])

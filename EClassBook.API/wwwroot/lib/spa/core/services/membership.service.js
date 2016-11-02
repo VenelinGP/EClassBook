@@ -31,7 +31,7 @@ let MembershipService = class MembershipService {
         return this.accountService.post(null, false);
     }
     isUserAuthenticated() {
-        var _user = localStorage.getItem('User');
+        var _user = localStorage.getItem('user');
         if (_user != null)
             return true;
         else

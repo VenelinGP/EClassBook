@@ -5,9 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { Location, LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { Headers, RequestOptions, BaseRequestOptions} from '@angular/http';
 
+import { AccountModule } from './components/account/account.module';
 import { AppComponent }   from './app.component';
 import { HomeComponent } from './components/home.component';
-import { UserComponent } from './components/user.component';
 import { routing } from './routes';
 
 import { DataService } from './core/services/data.service';
@@ -15,18 +15,27 @@ import { MembershipService } from './core/services/membership.service';
 import { UtilityService } from './core/services/utility.service';
 import { NotificationService } from './core/services/notification.service';
 
+class AppBaseRequestOptions extends BaseRequestOptions {
+    headers: Headers = new Headers();
+    constructor() {
+        super();
+        this.headers.append('Content-Type', 'application/json');
+        this.body = '';
+    }
+}
 
 @NgModule({
     imports: [
         BrowserModule,
         FormsModule,
         HttpModule,
-        routing
+        routing,
+        AccountModule
     ],
-    declarations: [AppComponent, HomeComponent, UserComponent],
+    declarations: [AppComponent, HomeComponent],
     providers: [DataService, MembershipService, UtilityService, NotificationService,
-        { provide: LocationStrategy, useClass: HashLocationStrategy }],
-        //{ provide: RequestOptions, useClass: AppBaseRequestOptions }],
+        { provide: LocationStrategy, useClass: HashLocationStrategy },
+        { provide: RequestOptions, useClass: AppBaseRequestOptions }],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

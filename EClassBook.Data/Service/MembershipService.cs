@@ -4,6 +4,7 @@
     using Contracts;
     using Model;
     using System;
+    using System.Collections.Generic;
     using System.Security.Principal;
 
     public class MembershipService : IMembershipService
@@ -40,7 +41,7 @@
 
             return membershipCtx;
         }
-        public User CreateUser(string username, string firstName, string lastName, string email, string password, int[] roles)
+        public User CreateUser(string username, string firstName, string lastName, string email, string password, int role)
         {
             var existingUser = userRepository.GetSingleByUsername(username);
 
@@ -62,22 +63,23 @@
                 Salt = passwordSalt,
                 Address = address,
                 IsLocked = false,
-                HashedPassword = encryptionService.EncryptPassword(password, passwordSalt)
+                HashedPassword = encryptionService.EncryptPassword(password, passwordSalt),
+                RoleId = role
             };
 
             userRepository.Add(user);
 
             userRepository.Commit();
 
-            if (roles != null || roles.Length > 0)
-            {
-                foreach (var role in roles)
-                {
-                    addUserToRole(user, role);
-                }
-            }
+            //if (roles != null || roles.Length > 0)
+            //{
+            //    foreach (var role in roles)
+            //    {
+            //        addUserToRole(user, role);
+            //    }
+            //}
 
-            userRepository.Commit();
+            //userRepository.Commit();
 
             return user;
         }
@@ -89,13 +91,15 @@
 
         public Role GetUserRoles(string username)
         {
-            Role result = new Role();
+            int roleId = 0;
+            Role result = null;
 
             var existingUser = userRepository.GetSingleByUsername(username);
 
             if (existingUser != null)
             {
-                    result = existingUser.Role;
+                roleId = existingUser.RoleId;
+                result = roleRepository.GetSingle(roleId);
             }
 
             return result;

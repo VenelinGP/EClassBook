@@ -3,31 +3,44 @@ import { Location } from '@angular/common';
 import 'rxjs/add/operator/map';
 import {enableProdMode} from '@angular/core';
 
-import { UserComponent, User } from './components/user.component';
+enableProdMode();
+import { MembershipService } from './core/services/membership.service';
+import { User } from './core/domain/user';
 
 
 @Component({
     selector: 'eclassbook-app',
     templateUrl: './app/app.component.html',
-
-    providers: [
-        UserComponent
-    ]
 })
-export class AppComponent extends OnInit {
 
-    constructor(private _service: UserComponent) {
-        super();
-    }
+export class AppComponent implements OnInit {
+
+    constructor(public membershipService: MembershipService,
+        public location: Location) { }
 
     ngOnInit() {
-        this._service.loadData().then(data => {
-            this.user = data;
-            this.address = data['Address'];
-            this.role = data['Role'];
-        })
+        this.location.go('/');
     }
-    user: User[] = [];
-    address: User[] = [];
-    role: User[] = [];
+
+    isUserLoggedIn(): boolean {
+        return this.membershipService.isUserAuthenticated();
+    }
+
+    getUserName(): string {
+        if (this.isUserLoggedIn()) {
+            var _user = this.membershipService.getLoggedInUser();
+            return _user.Username;
+        }
+        else
+            return 'Account';
+    }
+
+    logout(): void {
+        this.membershipService.logout()
+            .subscribe(res => {
+                localStorage.removeItem('user');
+            },
+            error => console.error('Error: ' + error),
+            () => { });
+    }
 }
