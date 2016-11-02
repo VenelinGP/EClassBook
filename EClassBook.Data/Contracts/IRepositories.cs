@@ -1,7 +1,6 @@
 ﻿namespace EClassBook.Common.Models
 {
     using Model;
-    using System.Collections.Generic;
 
     public interface IAddressRepository : IEntityBaseRepository<Address> { }
 

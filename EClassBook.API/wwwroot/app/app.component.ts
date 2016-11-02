@@ -1,18 +1,22 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { UserService, User } from './user.service';
+import { Location } from '@angular/common';
+import 'rxjs/add/operator/map';
+import {enableProdMode} from '@angular/core';
+
+import { UserComponent, User } from './components/user.component';
 
 
 @Component({
-    selector: 'my-app',
-    templateUrl: '../templates/user.service.html',
+    selector: 'eclassbook-app',
+    templateUrl: './app/app.component.html',
 
     providers: [
-        UserService
+        UserComponent
     ]
 })
 export class AppComponent extends OnInit {
 
-    constructor(private _service: UserService) {
+    constructor(private _service: UserComponent) {
         super();
     }
 

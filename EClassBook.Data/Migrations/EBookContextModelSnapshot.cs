@@ -206,28 +206,6 @@ namespace EClassBook.Data.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("EClassBook.Model.UserRole", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("CreatedOn");
-
-                    b.Property<DateTime?>("DeletedOn");
-
-                    b.Property<bool>("IsDeleted");
-
-                    b.Property<DateTime?>("ModifiedOn");
-
-                    b.Property<int?>("RoleId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("UserRole");
-                });
-
             modelBuilder.Entity("EClassBook.Model.Course", b =>
                 {
                     b.HasOne("EClassBook.Model.User")
@@ -263,13 +241,6 @@ namespace EClassBook.Data.Migrations
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("EClassBook.Model.UserRole", b =>
-                {
-                    b.HasOne("EClassBook.Model.Role", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId");
                 });
         }
     }

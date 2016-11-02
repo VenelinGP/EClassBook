@@ -4,8 +4,6 @@
     using Contracts;
     using Model;
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Security.Principal;
 
     public class MembershipService : IMembershipService
@@ -13,17 +11,14 @@
 
         private readonly IUserRepository userRepository;
         private readonly IRoleRepository roleRepository;
-        private readonly IUserRoleRepository userRoleRepository;
         private readonly IEncryptionService encryptionService;
 
         public MembershipService(IUserRepository userRepository,
                                 IRoleRepository roleRepository,
-                                IUserRoleRepository userRoleRepository,
                                 IEncryptionService encryptionService)
         {
             this.userRepository = userRepository;
             this.roleRepository = roleRepository;
-            this.userRoleRepository = userRoleRepository;
             this.encryptionService = encryptionService;
         }
 

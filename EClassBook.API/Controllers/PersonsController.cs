@@ -22,7 +22,7 @@
         [HttpGet]
         public IEnumerable<User> GetPersons()
         {
-            return this.context.User.ToList();
+            return context.User.ToArray();
         }
     }
 }

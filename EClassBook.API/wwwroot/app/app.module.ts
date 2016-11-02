@@ -1,19 +1,32 @@
 ﻿import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
+import { Location, LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { Headers, RequestOptions, BaseRequestOptions} from '@angular/http';
 
 import { AppComponent }   from './app.component';
-import { UserService } from './user.service';
+import { HomeComponent } from './components/home.component';
+import { UserComponent } from './components/user.component';
+import { routing } from './routes';
+
+import { DataService } from './core/services/data.service';
+import { MembershipService } from './core/services/membership.service';
+import { UtilityService } from './core/services/utility.service';
+import { NotificationService } from './core/services/notification.service';
+
 
 @NgModule({
-    imports: [BrowserModule,
-            FormsModule,
-            HttpModule],
-    declarations: [AppComponent],
-    providers: [
-        UserService
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpModule,
+        routing
     ],
+    declarations: [AppComponent, HomeComponent, UserComponent],
+    providers: [DataService, MembershipService, UtilityService, NotificationService,
+        { provide: LocationStrategy, useClass: HashLocationStrategy }],
+        //{ provide: RequestOptions, useClass: AppBaseRequestOptions }],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

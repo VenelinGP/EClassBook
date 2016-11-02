@@ -1,61 +1,86 @@
-﻿var gulp = require('gulp');
+﻿var gulp = require('gulp'),
+    ts = require('gulp-typescript'),
+    merge = require('merge'),
+    fs = require("fs"),
+    del = require('del'),
+    path = require('path');
 
-var libs = './wwwroot/libs/';
+eval("var project = " + fs.readFileSync("./project.json"));
+var lib = "./wwwroot/lib/";
 
-gulp.task('default', function () {
-    // place code for your default task here
+var paths = {
+    npm: './node_modules/',
+    tsSource: './wwwroot/app/**/*.ts',
+    tsOutput: lib + 'spa/',
+    tsDef: lib + 'definitions/',
+    jsVendors: lib + 'js',
+    jsRxJSVendors: lib + 'js/rxjs',
+    cssVendors: lib + 'css',
+    imgVendors: lib + 'img',
+    fontsVendors: lib + 'fonts'
+};
+
+
+var tsProject = ts.createProject('./wwwroot/tsconfig.json');
+
+gulp.task('setup-vendors', function (done) {
+    gulp.src([
+      'node_modules/jquery/dist/jquery.*js',
+      'bower_components/bootstrap/dist/js/bootstrap*.js',
+      'node_modules/fancybox/dist/js/jquery.fancybox.pack.js',
+      'bower_components/alertify.js/lib/alertify.min.js',
+      'systemjs.config.js'
+    ]).pipe(gulp.dest(paths.jsVendors));
+
+    gulp.src([
+      'bower_components/bootstrap/dist/css/bootstrap.css',
+      'node_modules/fancybox/dist/css/jquery.fancybox.css',
+      'bower_components/components-font-awesome/css/font-awesome.css',
+      'bower_components/alertify.js/themes/alertify.core.css',
+      'bower_components/alertify.js/themes/alertify.bootstrap.css',
+      'bower_components/alertify.js/themes/alertify.default.css'
+    ]).pipe(gulp.dest(paths.cssVendors));
+
+    gulp.src([
+      'node_modules/fancybox/dist/img/blank.gif',
+      'node_modules/fancybox/dist/img/fancybox_loading.gif',
+      'node_modules/fancybox/dist/img/fancybox_loading@2x.gif',
+      'node_modules/fancybox/dist/img/fancybox_overlay.png',
+      'node_modules/fancybox/dist/img/fancybox_sprite.png',
+      'node_modules/fancybox/dist/img/fancybox_sprite@2x.png'
+    ]).pipe(gulp.dest(paths.imgVendors));
+
+    gulp.src([
+      'node_modules/bootstrap/fonts/glyphicons-halflings-regular.eot',
+      'node_modules/bootstrap/fonts/glyphicons-halflings-regular.svg',
+      'node_modules/bootstrap/fonts/glyphicons-halflings-regular.ttf',
+      'node_modules/bootstrap/fonts/glyphicons-halflings-regular.woff',
+      'node_modules/bootstrap/fonts/glyphicons-halflings-regular.woff2',
+      'bower_components/components-font-awesome/fonts/FontAwesome.otf',
+      'bower_components/components-font-awesome/fonts/fontawesome-webfont.eot',
+      'bower_components/components-font-awesome/fonts/fontawesome-webfont.svg',
+      'bower_components/components-font-awesome/fonts/fontawesome-webfont.ttf',
+      'bower_components/components-font-awesome/fonts/fontawesome-webfont.woff',
+      'bower_components/components-font-awesome/fonts/fontawesome-webfont.woff2'
+    ]).pipe(gulp.dest(paths.fontsVendors));
 });
 
-gulp.task('restore:core-js', function () {
-    gulp.src([
-        'node_modules/core-js/client/*.js'
-    ]).pipe(gulp.dest(libs + 'core-js'));
-});
-gulp.task('restore:zone.js', function () {
-    gulp.src([
-        'node_modules/zone.js/dist/*.js'
-    ]).pipe(gulp.dest(libs + 'zone.js'));
-});
-gulp.task('restore:reflect-metadata', function () {
-    gulp.src([
-        'node_modules/reflect-metadata/reflect.js'
-    ]).pipe(gulp.dest(libs + 'reflect-metadata'));
-});
-gulp.task('restore:systemjs', function () {
-    gulp.src([
-        'node_modules/systemjs/dist/*.js'
-    ]).pipe(gulp.dest(libs + 'systemjs'));
-});
-gulp.task('restore:rxjs', function () {
-    gulp.src([
-        'node_modules/rxjs/**/*.js'
-    ]).pipe(gulp.dest(libs + 'rxjs'));
-});
-gulp.task('restore:angular-in-memory-web-api', function () {
-    gulp.src([
-        'node_modules/angular-in-memory-web-api/**/*.js'
-    ]).pipe(gulp.dest(libs + 'angular-in-memory-web-api'));
+gulp.task('compile-typescript', function (done) {
+    var tsResult = gulp.src([
+       "wwwroot/app/**/*.ts"
+    ])
+     .pipe(tsProject(ts.reporter.fullReporter())), undefined;
+    return tsResult.js.pipe(gulp.dest(paths.tsOutput));
 });
 
-gulp.task('restore:angular', function () {
-    gulp.src([
-        'node_modules/@angular/**/*.js'
-    ]).pipe(gulp.dest(libs + '@angular'));
+gulp.task('watch.ts', ['compile-typescript'], function () {
+    return gulp.watch('wwwroot/app/**/*.ts', ['compile-typescript']);
 });
 
-gulp.task('restore:bootstrap', function () {
-    gulp.src([
-        'node_modules/bootstrap/dist/**/*.*'
-    ]).pipe(gulp.dest(libs + 'bootstrap'));
+gulp.task('watch', ['watch.ts']);
+
+gulp.task('clean-lib', function () {
+    return del([lib]);
 });
 
-gulp.task('restore', [
-    'restore:core-js',
-    'restore:zone.js',
-    'restore:reflect-metadata',
-    'restore:systemjs',
-    'restore:rxjs',
-    'restore:angular-in-memory-web-api',
-    'restore:angular',
-    'restore:bootstrap'
-]);
+gulp.task('build-spa', ['setup-vendors', 'compile-typescript']);
