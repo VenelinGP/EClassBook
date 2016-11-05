@@ -77,9 +77,7 @@ namespace EClassBook.Data.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<string>("TeacherName");
-
-                    b.Property<int?>("UserId");
+                    b.Property<int>("UserId");
 
                     b.HasKey("Id");
 
@@ -129,13 +127,9 @@ namespace EClassBook.Data.Migrations
 
                     b.Property<DateTime?>("ModifiedOn");
 
-                    b.Property<int>("UserId");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CourseId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Grade");
                 });
@@ -208,21 +202,17 @@ namespace EClassBook.Data.Migrations
 
             modelBuilder.Entity("EClassBook.Model.Course", b =>
                 {
-                    b.HasOne("EClassBook.Model.User")
-                        .WithMany("Course")
-                        .HasForeignKey("UserId");
+                    b.HasOne("EClassBook.Model.User", "User")
+                        .WithMany("Courses")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("EClassBook.Model.Grade", b =>
                 {
                     b.HasOne("EClassBook.Model.Course", "Course")
-                        .WithMany()
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("EClassBook.Model.User", "User")
                         .WithMany("Grades")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

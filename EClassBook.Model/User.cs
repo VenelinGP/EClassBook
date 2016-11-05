@@ -6,12 +6,10 @@
     public class User : BaseModel
     {
         private ICollection<Course> courses;
-        private ICollection<Grade> grades;
 
         public User()
         {
             this.courses = new HashSet<Course>();
-            this.grades = new HashSet<Grade>();
         }
 
 
@@ -35,17 +33,7 @@
 
         public virtual Role Role { get; set; }
 
-
-        public virtual ICollection<Course> Course
-        {
-            get { return this.courses; }
-            set { this.courses = value; }
-        }
-        public virtual ICollection<Grade> Grades
-        {
-            get { return this.grades; }
-            set { this.grades = value; }
-        }
+        public virtual ICollection<Course> Courses { get; set; }
 
     }
 }

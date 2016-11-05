@@ -9,8 +9,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = require('@angular/core');
+const core_2 = require('@angular/core');
+core_2.enableProdMode();
+const membership_service_1 = require('../core/services/membership.service');
 let HomeComponent = class HomeComponent {
-    constructor() {
+    constructor(membershipService) {
+        this.membershipService = membershipService;
+    }
+    isUserLoggedIn() {
+        return this.membershipService.isUserAuthenticated();
     }
 };
 HomeComponent = __decorate([
@@ -18,6 +25,6 @@ HomeComponent = __decorate([
         selector: 'home',
         templateUrl: './app/components/home.component.html'
     }), 
-    __metadata('design:paramtypes', [])
+    __metadata('design:paramtypes', [membership_service_1.MembershipService])
 ], HomeComponent);
 exports.HomeComponent = HomeComponent;

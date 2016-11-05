@@ -5,7 +5,7 @@ import {enableProdMode} from '@angular/core';
 
 enableProdMode();
 import { MembershipService } from './core/services/membership.service';
-import { User } from './core/domain/user';
+import { User } from './core/models/user';
 
 
 @Component({

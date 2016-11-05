@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '../../core/domain/user';
+import { User } from '../../core/models/user';
 import { OperationResult } from '../../core/domain/operationResult';
 import { MembershipService } from '../../core/services/membership.service';
 import { NotificationService } from '../../core/services/notification.service';

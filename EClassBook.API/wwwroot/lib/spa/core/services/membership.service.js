@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = require('@angular/core');
 const data_service_1 = require('./data.service');
-const user_1 = require('../domain/user');
+const user_1 = require('../models/user');
 let MembershipService = class MembershipService {
     constructor(accountService) {
         this.accountService = accountService;

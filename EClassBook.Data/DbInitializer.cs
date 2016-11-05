@@ -37,6 +37,30 @@
                         Street = "2, Petko Karavelov str.",
                         PhoneNumber = "0889919030"
                     });
+                context.Address.Add(
+                    new Address()
+                    {
+                        Email = "ivan.ivanov@gmail.eu",
+                        City = "Sofia",
+                        Street = "1, str",
+                        PhoneNumber = "0888888881"
+                    });
+                context.Address.Add(
+                    new Address()
+                    {
+                        Email = "petar.petrov@gmail.eu",
+                        City = "Sofia",
+                        Street = "2, str",
+                        PhoneNumber = "0888888882"
+                    });
+                context.Address.Add(
+                    new Address()
+                    {
+                        Email = "stanimir.andreev@gmail.eu",
+                        City = "Sofia",
+                        Street = "3, str",
+                        PhoneNumber = "0888888881"
+                    });
                 context.SaveChanges();
             }
             if (!context.User.Any())
@@ -52,35 +76,56 @@
                     AddressId = 1,
                     RoleId = 1
                 });
-                // create user-addres for venelin
-
-                // create user - admin for venelin
-
-                //context.UserRoles.AddRange(new UserRole[] {
-                //    new UserRole() {
-                //        RoleId = 1, // admin
-                //        UserId = 1  // Venelin
-                //    }
-                // });
-                //context.SaveChanges();
+                context.User.Add(new User()
+                {
+                    Username = "iv1784",
+                    FirstName = "Ivan",
+                    LastName = "Ivanov",
+                    HashedPassword = "mNKopj2efeRvymuXuh7mPlPUTCgcSWxgjjwTu81A6PU=",
+                    Salt = "rFPWsKNemjbh/6pU0SgOWQ==",
+                    IsLocked = false,
+                    AddressId = 2,
+                    RoleId = 2
+                });
+                context.User.Add(new User()
+                {
+                    Username = "pv1894",
+                    FirstName = "Petar",
+                    LastName = "Petrov",
+                    HashedPassword = "fVzqOHiFdEnbLok8yJfA6ClJ50mAyxYe4HRti+TMtpQ=",
+                    Salt = "11D8qk5uxxEP/gBTbm/Ysw==",
+                    IsLocked = false,
+                    AddressId = 3,
+                    RoleId = 2
+                });
+                context.User.Add(new User()
+                {
+                    Username = "sv1243",
+                    FirstName = "Stanimir",
+                    LastName = "Andreev",
+                    HashedPassword = "eexTx6FQmehrbU9VZfoF68G6wl6tAjmS9ELOswp3gN0=",
+                    Salt = "1N7Ef79voetSkdyDdidpeA==",
+                    IsLocked = false,
+                    AddressId = 4,
+                    RoleId = 2
+                });
+                context.SaveChanges();
             }
+
             if (!context.Courses.Any())
             {
-                context.AddRange(new Course[]
-                {
-                    new Course() { Name="Български език" },
-                    new Course() { Name="Математика" },
-                    new Course() { Name="Физика" },
-                    new Course() { Name="Английски език" },
-                    new Course() { Name="География" },
-                    new Course() { Name="История" },
-                    new Course() { Name="Химия" },
-                    new Course() { Name="Биология" },
-                    new Course() { Name="Информационни технологии" },
-                    new Course() { Name="Изобразително изкуство" },
-                    new Course() { Name="Музика" },
-                    new Course() { Name="Физическо и спорт" },
-                });
+                context.Courses.Add( new Course() { Name = "Български език", UserId = 1 });
+                context.Courses.Add( new Course() { Name = "Математика", UserId = 2 });
+                context.Courses.Add( new Course() { Name = "Физика", UserId = 2 });
+                context.Courses.Add( new Course() { Name = "Английски език", UserId = 1 });
+                context.Courses.Add( new Course() { Name = "География", UserId = 3 });
+                context.Courses.Add(new Course() { Name = "История", UserId = 4 });
+                context.Courses.Add(new Course() { Name = "Химия", UserId = 3 });
+                context.Courses.Add(new Course() { Name = "Биология", UserId = 4 });
+                context.Courses.Add(new Course() { Name = "Информационни технологии", UserId = 2 });
+                //context.Courses.Add( new Course() { Name = "Изобразително изкуство" });
+                //context.Courses.Add( new Course() { Name = "Музика" });
+                //context.Courses.Add( new Course() { Name = "Физическо и спорт" });
 
                 context.SaveChanges();
             }

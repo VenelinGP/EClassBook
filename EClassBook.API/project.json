@@ -5,13 +5,12 @@
     "preserveCompilationContext": true
   },
   "dependencies": {
-    //"AutoMapper.Data": "1.0.0-beta1",
+    "AutoMapper.Data": "1.0.0-beta1",
     //"FluentValidation": "6.4.0-beta5",
     "Microsoft.NETCore.App": {
       "version": "1.0.1",
       "type": "platform"
     },
-     "AutoMapper.Data": "1.0.0-beta1",
         "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
         "Microsoft.AspNetCore.Diagnostics": "1.0.0",
         "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "1.0.0",

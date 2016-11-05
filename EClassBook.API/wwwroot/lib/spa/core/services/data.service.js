@@ -16,10 +16,9 @@ let DataService = class DataService {
     }
     set(baseUri, pageSize) {
         this._baseUri = baseUri;
-        this._pageSize = pageSize;
     }
-    get(page) {
-        var uri = this._baseUri + page.toString() + '/' + this._pageSize.toString();
+    get() {
+        var uri = this._baseUri + '/';
         return this.http.get(uri)
             .map(response => (response));
     }

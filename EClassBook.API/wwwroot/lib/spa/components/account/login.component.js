@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = require('@angular/core');
 const router_1 = require('@angular/router');
-const user_1 = require('../../core/domain/user');
+const user_1 = require('../../core/models/user');
 const operationResult_1 = require('../../core/domain/operationResult');
 const membership_service_1 = require('../../core/services/membership.service');
 const notification_service_1 = require('../../core/services/notification.service');

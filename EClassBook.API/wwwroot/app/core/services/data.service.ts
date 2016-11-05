@@ -5,7 +5,6 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class DataService {
 
-    public _pageSize: number;
     public _baseUri: string;
 
     constructor(public http: Http) {
@@ -14,12 +13,10 @@ export class DataService {
 
     set(baseUri: string, pageSize?: number): void {
         this._baseUri = baseUri;
-        this._pageSize = pageSize;
     }
 
-    get(page: number) {
-        var uri = this._baseUri + page.toString() + '/' + this._pageSize.toString();
-
+    get() {
+        var uri = this._baseUri + '/';
         return this.http.get(uri)
             .map(response => (<Response>response));
     }

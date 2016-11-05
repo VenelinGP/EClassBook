@@ -15,6 +15,7 @@
     using System.Security.Claims;
     using Newtonsoft.Json.Serialization;
     using Microsoft.Extensions.FileProviders;
+    using Mappings;
 
     public class Startup
     {
@@ -120,7 +121,7 @@
             fileServerOptions.EnableDirectoryBrowsing = true;
             app.UseFileServer(fileServerOptions);
 
-            //AutoMapperConfiguration.Configure();
+            AutoMapperConfiguration.Configure();
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions
                     {
