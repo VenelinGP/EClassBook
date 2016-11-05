@@ -1,0 +1,33 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                {{teacherName}}
+            </h1>
+            <ol class="breadcrumb">
+                <li>
+                    <a [routerLink]="['/home']">Home</a>
+                </li>
+                <li>
+                    <a [routerLink]="['/teacher']">Teachers</a>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="row text-left">
+        <div class="col-lg-4 col-sm-4" *ngFor="let course of courses">
+            <div class="thumbnail blue-thumb">
+                <strong>{{course.Name}}</strong>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-4 buttonCaption">
+            <button class="btn btn-xs btn-info" (click)="add(course)">
+                <span class="fa-2x">
+                    Add new Course
+                </span>
+            </button>
+        </div>
+    </div>
+</div>
