@@ -19,6 +19,7 @@ const app_component_1 = require('./app.component');
 const home_component_1 = require('./components/home.component');
 const teachers_component_1 = require('./components/teachers.component');
 const teacher_courses_component_1 = require('./components/teacher-courses.component');
+const all_courses_component_1 = require('./components/all-courses.component');
 const routes_1 = require('./routes');
 const data_service_1 = require('./core/services/data.service');
 const membership_service_1 = require('./core/services/membership.service');
@@ -43,7 +44,7 @@ AppModule = __decorate([
             routes_1.routing,
             account_module_1.AccountModule
         ],
-        declarations: [app_component_1.AppComponent, home_component_1.HomeComponent, teachers_component_1.TeachersComponent, teacher_courses_component_1.TeacherCoursesComponent],
+        declarations: [app_component_1.AppComponent, home_component_1.HomeComponent, teachers_component_1.TeachersComponent, teacher_courses_component_1.TeacherCoursesComponent, all_courses_component_1.AllCoursesComponent],
         providers: [data_service_1.DataService, membership_service_1.MembershipService, utility_service_1.UtilityService, notification_service_1.NotificationService,
             { provide: common_1.LocationStrategy, useClass: common_1.HashLocationStrategy },
             { provide: http_2.RequestOptions, useClass: AppBaseRequestOptions }],

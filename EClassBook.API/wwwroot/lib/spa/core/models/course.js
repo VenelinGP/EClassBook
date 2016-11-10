@@ -1,10 +1,10 @@
 "use strict";
 class Course {
-    constructor(id, name, userId, user) {
+    constructor(name, userId, id, teacherName) {
         this.Id = id;
         this.Name = name;
         this.UserId = userId;
-        this.TeacherName = user;
+        this.TeacherName = teacherName;
     }
 }
 exports.Course = Course;

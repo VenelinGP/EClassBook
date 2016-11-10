@@ -30,6 +30,7 @@
     "EClassBook.Data": "1.0.0-*",
     "EClassBook.Model": "1.0.0-*",
     "Microsoft.Extensions.Logging.Console": "1.1.0-preview1-final",
+    "Microsoft.AspNetCore.Mvc.Core": "1.0.1",
   },
   "tools": {
     "Microsoft.AspNetCore.Razor.Tools": {

@@ -12,13 +12,12 @@
             </ol>
         </div>
     </div>
-    <div class="row">
-        <div class="col-lg-4 col-sm-4" *ngFor="let teacher of teachers">
-            <div class="thumbnail blue-thumb">
+    <ul class="row">
+        <li class="panel panel-default col-lg-12 col-sm-12" *ngFor="let teacher of teachers">
+            <div class="panel-body">
                 <a [routerLink]="['/teacher/:id', {id: teacher.Id}]"><strong>{{teacher.FirstName}} {{teacher.LastName}}</strong></a>
-                <br />
             </div>
-        </div>
-    </div>
+        </li>
+    </ul>
 
 </div>

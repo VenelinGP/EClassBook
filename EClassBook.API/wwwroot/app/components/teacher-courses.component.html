@@ -11,23 +11,22 @@
                 <li>
                     <a [routerLink]="['/teacher']">Teachers</a>
                 </li>
+
+                <li>
+                    <a [routerLink]="['/courses']">Courses</a>
+                </li>
             </ol>
         </div>
     </div>
-    <div class="row text-left">
-        <div class="col-lg-4 col-sm-4" *ngFor="let course of courses">
-            <div class="thumbnail blue-thumb">
-                <strong>{{course.Name}}</strong>
+    <blockquote>
+
+        <div class="row">
+            <div class="panel panel-default col-lg-12 col-sm-12" *ngFor="let course of courses">
+                <div class="panel-body col-lg-4 col-sm-4 ">
+                    <strong>{{course.Name}}</strong>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-4 buttonCaption">
-            <button class="btn btn-xs btn-info" (click)="add(course)">
-                <span class="fa-2x">
-                    Add new Course
-                </span>
-            </button>
-        </div>
-    </div>
+    </blockquote>
+
 </div>

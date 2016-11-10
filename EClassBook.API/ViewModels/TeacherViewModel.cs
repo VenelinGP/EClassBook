@@ -18,7 +18,5 @@
         [EmailAddress]
         public string Email { get; set; }
 
-        //public IEnumerable<Course> courses { get; set; }
-
     }
 }

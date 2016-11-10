@@ -1,7 +1,6 @@
 ﻿namespace EClassBook.API.ViewModels
 {
     using Microsoft.AspNetCore.Mvc;
-    using Model;
     using System.ComponentModel.DataAnnotations;
 
     [Route("api/[controller]")]

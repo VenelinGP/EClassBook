@@ -1,16 +1,13 @@
 ﻿export class Course {
     Id: number;
     Name: string;
-    UserId: string;
+    UserId: number;
     TeacherName: string;
 
-    constructor(id: number,
-        name: string,
-        userId: string,
-        user: string) {
+    constructor(name: string, userId: number, id?: number, teacherName?: string) {
         this.Id = id;
         this.Name = name;
         this.UserId = userId;
-        this.TeacherName = user;
+        this.TeacherName = teacherName;
     }
 }
