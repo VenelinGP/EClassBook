@@ -86,7 +86,6 @@ let AllCoursesComponent = class AllCoursesComponent {
             _addingResult.Message = res.Message;
         }, error => console.error('Error: ' + error), () => {
             if (_addingResult.Succeeded) {
-                //this.notificationService.printSuccessMessage('Dear ' + this._newUser.Username + ', please login with your credentials');
                 this.router.navigate(['api/courses']);
                 this.ngOnInit();
             }

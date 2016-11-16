@@ -1,7 +1,6 @@
 "use strict";
 class Group {
-    constructor(name, id) {
-        this.Id = id;
+    constructor(name) {
         this.Name = name;
     }
 }

@@ -1,5 +1,43 @@
 ﻿<div class="container">
     <div class="row">
-        <h2>Group</h2>
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Classes
+            </h1>
+            <ol class="breadcrumb">
+                <li>
+                    <a [routerLink]="['/home']">Home</a>
+                </li>
+                <li class="active">Classes</li>
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="grid grid-pad">
+            <div *ngFor="let group of groups" (click)="gotoDetail(group)" class="col-1-6">
+                <div class="module group">
+                    <h4>{{group.Name}}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="breadcrumb">
+            <strong>Adding Group:</strong>
+        </div>
+        <div class="col-lg-5 col-sm-5">
+            <form class="form " #loginForm="ngForm">
+                <div>
+                    <input type="text" class="form-control" placeholder="Group Name" name="name" [(ngModel)]="newGroup.Name"
+                           ngControl="name" #name="ngModel" />
+                    <div [hidden]="name.valid || name.untouched" class="alert alert-danger">
+                        Group name is required!
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-3 col-sm-3">
+            <button class="btn btn-info" (click)="add(newGroup.Name)">Adding</button>
+        </div>
     </div>
 </div>

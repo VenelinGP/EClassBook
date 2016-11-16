@@ -7,14 +7,15 @@ import { NotificationService } from '../core/services/notification.service';
 import { OperationResult } from '../core/domain/operationResult';
 
 @Component({
-    selector: 'group',
+    selector: 'groups',
     providers: [NotificationService],
-    templateUrl: './app/components/all-group.component.html'
+    templateUrl: './app/components/all-group.component.html',
+    styleUrls: ['../../styles/all-group.component.css']
 })
 
 export class AllGroupComponent implements OnInit {
     private groupAPI: string = 'api/group';
-    private group: Group[];
+    private groups: Group[];
     private newGroup: Group;
 
     constructor(public groupService: DataService,
@@ -28,7 +29,7 @@ export class AllGroupComponent implements OnInit {
     ngOnInit() {
         this.groupService.set(this.groupAPI);
         this.getGroup();
-        this.newGroup = new Group('', null);
+        this.newGroup = new Group('');
     }
 
     getGroup(): void {
@@ -36,7 +37,7 @@ export class AllGroupComponent implements OnInit {
             .subscribe(res => {
 
                 var data: any = res.json();
-                this.group = data;
+                this.groups = data;
             },
             error => console.error('Error: ' + error));
     }
@@ -70,9 +71,8 @@ export class AllGroupComponent implements OnInit {
     };
     add(name: string) {
         var _addingResult: OperationResult = new OperationResult(false, '');
-        debugger;
         this.newGroup = new Group(name);
-        console.log(this.newGroup);
+        //console.log(this.newGroup);
         this.groupService.set(this.groupAPI);
         this.dataService.post(this.newGroup, true)
             .subscribe(res => {
@@ -83,7 +83,6 @@ export class AllGroupComponent implements OnInit {
             error => console.error('Error: ' + error),
             () => {
                 if (_addingResult.Succeeded) {
-                    //this.notificationService.printSuccessMessage('Dear ' + this._newUser.Username + ', please login with your credentials');
                     this.router.navigate(['api/group']);
                     this.ngOnInit();
 

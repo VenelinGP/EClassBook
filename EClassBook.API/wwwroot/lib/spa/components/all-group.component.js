@@ -28,13 +28,13 @@ let AllGroupComponent = class AllGroupComponent {
     ngOnInit() {
         this.groupService.set(this.groupAPI);
         this.getGroup();
-        this.newGroup = new group_1.Group('', null);
+        this.newGroup = new group_1.Group('');
     }
     getGroup() {
         this.groupService.get()
             .subscribe(res => {
             var data = res.json();
-            this.group = data;
+            this.groups = data;
         }, error => console.error('Error: ' + error));
     }
     search(i) {
@@ -63,9 +63,8 @@ let AllGroupComponent = class AllGroupComponent {
     ;
     add(name) {
         var _addingResult = new operationResult_1.OperationResult(false, '');
-        debugger;
         this.newGroup = new group_1.Group(name);
-        console.log(this.newGroup);
+        //console.log(this.newGroup);
         this.groupService.set(this.groupAPI);
         this.dataService.post(this.newGroup, true)
             .subscribe(res => {
@@ -73,7 +72,6 @@ let AllGroupComponent = class AllGroupComponent {
             _addingResult.Message = res.Message;
         }, error => console.error('Error: ' + error), () => {
             if (_addingResult.Succeeded) {
-                //this.notificationService.printSuccessMessage('Dear ' + this._newUser.Username + ', please login with your credentials');
                 this.router.navigate(['api/group']);
                 this.ngOnInit();
             }
@@ -86,9 +84,10 @@ let AllGroupComponent = class AllGroupComponent {
 };
 AllGroupComponent = __decorate([
     core_1.Component({
-        selector: 'group',
+        selector: 'groups',
         providers: [notification_service_1.NotificationService],
-        templateUrl: './app/components/all-group.component.html'
+        templateUrl: './app/components/all-group.component.html',
+        styleUrls: ['../../styles/all-group.component.css']
     }), 
     __metadata('design:paramtypes', [data_service_1.DataService, data_service_1.DataService, utility_service_1.UtilityService, notification_service_1.NotificationService, router_1.ActivatedRoute, router_1.Router])
 ], AllGroupComponent);

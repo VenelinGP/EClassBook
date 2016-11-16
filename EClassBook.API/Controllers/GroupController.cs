@@ -8,6 +8,7 @@
     using Common.Models;
     using ViewModels;
     using AutoMapper;
+    using Common.Infrastructure.Core;
 
     [Route("api/[controller]")]
     public class GroupController : Controller
@@ -25,7 +26,7 @@
 
 
         [HttpGet]
-        public IEnumerable<GroupViewModel> Index()
+        public IEnumerable<Group> Index()
         {
             List<Group> groups = null;
             try
@@ -39,8 +40,8 @@
                 loggingRepository.Add(new Error() { Message = ex.Message, StackTrace = ex.StackTrace, CreatedOn = DateTime.Now });
                 loggingRepository.Commit();
             }
-            var groupsVM = Mapper.Map<IEnumerable<Group>, IEnumerable<GroupViewModel>>(groups);
-            return groupsVM;
+            //var groupsVM = Mapper.Map<IEnumerable<Group>, IEnumerable<GroupViewModel>>(groups);
+            return groups;
         }
 
         [HttpGet("{id:int}")]
@@ -63,5 +64,39 @@
 
             return groups;
         }
+        [HttpPost]
+        public IActionResult Post([FromBody]Group group)
+        {
+            IActionResult result = new ObjectResult(false);
+            GenericResult addingResult = null;
+            try
+            {
+                this.groupRepository.Add(group);
+                this.groupRepository.Commit();
+
+                addingResult = new GenericResult()
+                {
+                    Succeeded = true,
+                    Message = "Group added."
+                };
+            }
+            catch (Exception ex)
+            {
+
+                addingResult = new GenericResult()
+                {
+                    Succeeded = false,
+                    Message = ex.Message
+                };
+
+                loggingRepository.Add(new Error() { Message = ex.Message, StackTrace = ex.StackTrace, CreatedOn = DateTime.Now });
+                loggingRepository.Commit();
+            }
+
+            result = new ObjectResult(addingResult);
+            return result;
+
+        }
+
     }
 }

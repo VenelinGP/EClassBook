@@ -2,8 +2,7 @@
     Id: number;
     Name: string;
 
-    constructor(name: string, id?: number) {
-        this.Id = id;
+    constructor(name: string) {
         this.Name = name;
     }
 }
