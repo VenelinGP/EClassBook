@@ -10,61 +10,48 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = require('@angular/core');
 const router_1 = require('@angular/router');
-const course_1 = require('../core/models/course');
-const teacher_1 = require('../core/models/teacher');
+const group_1 = require('../core/models/group');
 const data_service_1 = require('../core/services/data.service');
 const utility_service_1 = require('../core/services/utility.service');
 const notification_service_1 = require('../core/services/notification.service');
 const operationResult_1 = require('../core/domain/operationResult');
-let AllCoursesComponent = class AllCoursesComponent {
-    constructor(courseService, teacherService, dataService, utilityService, notificationService, route, router) {
-        this.courseService = courseService;
-        this.teacherService = teacherService;
+let AllGroupComponent = class AllGroupComponent {
+    constructor(groupService, dataService, utilityService, notificationService, route, router) {
+        this.groupService = groupService;
         this.dataService = dataService;
         this.utilityService = utilityService;
         this.notificationService = notificationService;
         this.route = route;
         this.router = router;
-        this.courseAPI = 'api/courses';
-        this.teacherAPI = 'api/teacher';
+        this.groupAPI = 'api/group';
     }
     ngOnInit() {
-        this.courseService.set(this.courseAPI);
-        this.getCourses();
-        this.teacherService.set(this.teacherAPI);
-        this.getTeachers();
-        this.newCourse = new course_1.Course('', null);
-        this.addTeacher = new teacher_1.Teacher(null, '', '', '', null, null);
+        this.groupService.set(this.groupAPI);
+        this.getGroup();
+        this.newGroup = new group_1.Group('', null);
     }
-    getCourses() {
-        this.courseService.get()
+    getGroup() {
+        this.groupService.get()
             .subscribe(res => {
             var data = res.json();
-            this.courses = data;
-        }, error => console.error('Error: ' + error));
-    }
-    getTeachers() {
-        this.teacherService.get()
-            .subscribe(res => {
-            var data = res.json();
-            this.teachers = data;
+            this.group = data;
         }, error => console.error('Error: ' + error));
     }
     search(i) {
-        this.getCourses();
+        this.getGroup();
     }
     ;
-    delete(course) {
+    delete(group) {
         var _removeResult = new operationResult_1.OperationResult(false, '');
         this.notificationService.printConfirmationDialog('Are you sure you want to delete the Course?', () => {
-            this.dataService.deleteResource(this.courseAPI + '/' + course.Id)
+            this.dataService.deleteResource(this.groupAPI + '/' + group.Id)
                 .subscribe(res => {
                 _removeResult.Succeeded = res.Succeeded;
                 _removeResult.Message = res.Message;
             }, error => console.error('Error: ' + error), () => {
                 if (_removeResult.Succeeded) {
-                    this.notificationService.printSuccessMessage(course.Name + ' is removed.');
-                    this.router.navigate(['api/courses']);
+                    this.notificationService.printSuccessMessage(group.Name + ' is removed.');
+                    this.router.navigate(['api/group']);
                     this.ngOnInit();
                 }
                 else {
@@ -74,35 +61,35 @@ let AllCoursesComponent = class AllCoursesComponent {
         });
     }
     ;
-    add(name, teacher) {
+    add(name) {
         var _addingResult = new operationResult_1.OperationResult(false, '');
         debugger;
-        this.newCourse = new course_1.Course(name, teacher.Id);
-        console.log(this.newCourse);
-        this.courseService.set(this.courseAPI);
-        this.dataService.post(this.newCourse, true)
+        this.newGroup = new group_1.Group(name);
+        console.log(this.newGroup);
+        this.groupService.set(this.groupAPI);
+        this.dataService.post(this.newGroup, true)
             .subscribe(res => {
             _addingResult.Succeeded = res.Succeeded;
             _addingResult.Message = res.Message;
         }, error => console.error('Error: ' + error), () => {
             if (_addingResult.Succeeded) {
                 //this.notificationService.printSuccessMessage('Dear ' + this._newUser.Username + ', please login with your credentials');
-                this.router.navigate(['api/courses']);
+                this.router.navigate(['api/group']);
                 this.ngOnInit();
             }
             else {
                 this.notificationService.printErrorMessage(_addingResult.Message);
-                this.router.navigate(['api/courses']);
+                this.router.navigate(['api/group']);
             }
         });
     }
 };
-AllCoursesComponent = __decorate([
+AllGroupComponent = __decorate([
     core_1.Component({
-        selector: 'courses',
+        selector: 'group',
         providers: [notification_service_1.NotificationService],
-        templateUrl: './app/components/all-courses.component.html'
+        templateUrl: './app/components/all-group.component.html'
     }), 
-    __metadata('design:paramtypes', [data_service_1.DataService, data_service_1.DataService, data_service_1.DataService, utility_service_1.UtilityService, notification_service_1.NotificationService, router_1.ActivatedRoute, router_1.Router])
-], AllCoursesComponent);
-exports.AllCoursesComponent = AllCoursesComponent;
+    __metadata('design:paramtypes', [data_service_1.DataService, data_service_1.DataService, utility_service_1.UtilityService, notification_service_1.NotificationService, router_1.ActivatedRoute, router_1.Router])
+], AllGroupComponent);
+exports.AllGroupComponent = AllGroupComponent;

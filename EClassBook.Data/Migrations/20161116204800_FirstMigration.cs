@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -30,23 +29,6 @@ namespace EClassBook.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ClassGroup",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CreatedOn = table.Column<DateTime>(nullable: false),
-                    DeletedOn = table.Column<DateTime>(nullable: true),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    ModifiedOn = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ClassGroup", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Error",
                 columns: table => new
                 {
@@ -62,6 +44,23 @@ namespace EClassBook.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Error", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Group",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Group", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -88,10 +87,10 @@ namespace EClassBook.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AddressId = table.Column<int>(nullable: false),
-                    ClassGroupId = table.Column<int>(nullable: true),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
                     FirstName = table.Column<string>(nullable: true),
+                    GroupId = table.Column<int>(nullable: true),
                     HashedPassword = table.Column<string>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     IsLocked = table.Column<bool>(nullable: false),
@@ -111,9 +110,9 @@ namespace EClassBook.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_User_ClassGroup_ClassGroupId",
-                        column: x => x.ClassGroupId,
-                        principalTable: "ClassGroup",
+                        name: "FK_User_Group_GroupId",
+                        column: x => x.GroupId,
+                        principalTable: "Group",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -135,7 +134,7 @@ namespace EClassBook.Data.Migrations
                     IsDeleted = table.Column<bool>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    UserId = table.Column<int>(nullable: false)
+                    UserId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -145,7 +144,7 @@ namespace EClassBook.Data.Migrations
                         column: x => x.UserId,
                         principalTable: "User",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -189,9 +188,9 @@ namespace EClassBook.Data.Migrations
                 column: "AddressId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_User_ClassGroupId",
+                name: "IX_User_GroupId",
                 table: "User",
-                column: "ClassGroupId");
+                column: "GroupId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_User_RoleId",
@@ -217,7 +216,7 @@ namespace EClassBook.Data.Migrations
                 name: "Address");
 
             migrationBuilder.DropTable(
-                name: "ClassGroup");
+                name: "Group");
 
             migrationBuilder.DropTable(
                 name: "Role");

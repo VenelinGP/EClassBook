@@ -4,9 +4,9 @@
     using Model;
     using Model.Repositories;
 
-    public class ClassRepository : EntityBaseRepository<ClassGroup>, IClassRepository
+    public class GroupRepository : EntityBaseRepository<Group>, IGroupRepository
     {
-        public ClassRepository(EBookContext context)
+        public GroupRepository(EBookContext context)
             : base(context)
         { }
     }

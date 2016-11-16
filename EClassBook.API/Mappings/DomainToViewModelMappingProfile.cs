@@ -2,7 +2,6 @@
 {
     using AutoMapper;
     using Model;
-    using System.Linq;
     using ViewModels;
 
     public class DomainToViewModelMappingProfile : Profile
@@ -11,6 +10,10 @@
         {
             Mapper.CreateMap<Course, CourseViewModel>()
                 .ForMember(vm => vm.TeacherName, map => map.MapFrom(c => c.User.FirstName + " " + c.User.LastName));
+
+            Mapper.CreateMap<User, TeacherViewModel>()
+               .ForMember(vm => vm.Email, map => map.MapFrom(c => c.Address.Email));
+
         }
     }
 }

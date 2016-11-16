@@ -20,7 +20,7 @@
 
         public DbSet<Address> Address { get; set; }
 
-        public DbSet<ClassGroup> Classes { get; set; }
+        public DbSet<Group> Classes { get; set; }
 
         public DbSet<Course> Courses { get; set; }
 

@@ -25,9 +25,13 @@
 
         public bool IsLocked { get; set; }
 
-        public int AddressId { get; set; }
+        public int? AddressId { get; set; }
 
         public virtual Address Address { get; set; }
+
+        public int? GroupId { get; set; }
+
+        public virtual Group Group { get; set; }
 
         public int RoleId { get; set; }
 

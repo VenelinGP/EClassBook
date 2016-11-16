@@ -11,6 +11,8 @@ import { HomeComponent } from './components/home.component';
 import { TeachersComponent } from './components/teachers.component';
 import { TeacherCoursesComponent } from './components/teacher-courses.component';
 import { AllCoursesComponent } from './components/all-courses.component';
+import { AllGroupComponent } from './components/all-group.component';
+
 
 import { routing } from './routes';
 
@@ -36,7 +38,8 @@ class AppBaseRequestOptions extends BaseRequestOptions {
         routing,
         AccountModule
     ],
-    declarations: [AppComponent, HomeComponent, TeachersComponent, TeacherCoursesComponent, AllCoursesComponent],
+    declarations: [AppComponent, HomeComponent, TeachersComponent, TeacherCoursesComponent,
+        AllCoursesComponent, AllGroupComponent],
     providers: [DataService, MembershipService, UtilityService, NotificationService,
         { provide: LocationStrategy, useClass: HashLocationStrategy },
         { provide: RequestOptions, useClass: AppBaseRequestOptions }],

@@ -56,7 +56,7 @@
                 removeResult = new GenericResult()
                 {
                     Succeeded = true,
-                    Message = "Photo removed."
+                    Message = "Course removed."
                 };
             }
             catch (Exception ex)

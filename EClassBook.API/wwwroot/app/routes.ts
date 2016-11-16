@@ -5,6 +5,8 @@ import { HomeComponent } from './components/home.component';
 import { TeachersComponent } from './components/teachers.component';
 import { TeacherCoursesComponent } from './components/teacher-courses.component';
 import { AllCoursesComponent } from './components/all-courses.component';
+import { AllGroupComponent } from './components/all-group.component';
+
 
 import { accountRoutes, accountRouting } from './components/account/routes';
 
@@ -26,11 +28,14 @@ const appRoutes: Routes = [
     {
         path: 'teacher/:id',
         component: TeacherCoursesComponent
-    }
-    ,
+    },
     {
         path: 'courses',
         component: AllCoursesComponent
+    },
+    {
+        path: 'group',
+        component: AllGroupComponent
     }
 
 ];

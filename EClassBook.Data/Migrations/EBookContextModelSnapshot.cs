@@ -42,26 +42,6 @@ namespace EClassBook.Data.Migrations
                     b.ToTable("Address");
                 });
 
-            modelBuilder.Entity("EClassBook.Model.ClassGroup", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("CreatedOn");
-
-                    b.Property<DateTime?>("DeletedOn");
-
-                    b.Property<bool>("IsDeleted");
-
-                    b.Property<DateTime?>("ModifiedOn");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ClassGroup");
-                });
-
             modelBuilder.Entity("EClassBook.Model.Course", b =>
                 {
                     b.Property<int>("Id")
@@ -77,7 +57,7 @@ namespace EClassBook.Data.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("UserId");
+                    b.Property<int?>("UserId");
 
                     b.HasKey("Id");
 
@@ -134,6 +114,26 @@ namespace EClassBook.Data.Migrations
                     b.ToTable("Grade");
                 });
 
+            modelBuilder.Entity("EClassBook.Model.Group", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<DateTime?>("DeletedOn");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<DateTime?>("ModifiedOn");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Group");
+                });
+
             modelBuilder.Entity("EClassBook.Model.Role", b =>
                 {
                     b.Property<int>("Id")
@@ -161,15 +161,16 @@ namespace EClassBook.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("AddressId");
-
-                    b.Property<int?>("ClassGroupId");
+                    b.Property<int?>("AddressId")
+                        .IsRequired();
 
                     b.Property<DateTime>("CreatedOn");
 
                     b.Property<DateTime?>("DeletedOn");
 
                     b.Property<string>("FirstName");
+
+                    b.Property<int?>("GroupId");
 
                     b.Property<string>("HashedPassword");
 
@@ -193,7 +194,7 @@ namespace EClassBook.Data.Migrations
 
                     b.HasIndex("AddressId");
 
-                    b.HasIndex("ClassGroupId");
+                    b.HasIndex("GroupId");
 
                     b.HasIndex("RoleId");
 
@@ -204,8 +205,7 @@ namespace EClassBook.Data.Migrations
                 {
                     b.HasOne("EClassBook.Model.User", "User")
                         .WithMany("Courses")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("EClassBook.Model.Grade", b =>
@@ -223,9 +223,9 @@ namespace EClassBook.Data.Migrations
                         .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("EClassBook.Model.ClassGroup")
+                    b.HasOne("EClassBook.Model.Group", "Group")
                         .WithMany("Users")
-                        .HasForeignKey("ClassGroupId");
+                        .HasForeignKey("GroupId");
 
                     b.HasOne("EClassBook.Model.Role", "Role")
                         .WithMany()

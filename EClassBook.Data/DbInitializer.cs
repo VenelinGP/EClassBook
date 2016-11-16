@@ -123,9 +123,9 @@
                 context.Courses.Add(new Course() { Name = "Химия", UserId = 3 });
                 context.Courses.Add(new Course() { Name = "Биология", UserId = 4 });
                 context.Courses.Add(new Course() { Name = "Информационни технологии", UserId = 2 });
-                //context.Courses.Add( new Course() { Name = "Изобразително изкуство" });
-                //context.Courses.Add( new Course() { Name = "Музика" });
-                //context.Courses.Add( new Course() { Name = "Физическо и спорт" });
+                context.Courses.Add(new Course() { Name = "Изобразително изкуство" });
+                context.Courses.Add(new Course() { Name = "Музика" });
+                context.Courses.Add(new Course() { Name = "Физическо и спорт" });
 
                 context.SaveChanges();
             }
